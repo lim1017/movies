@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import './App.css';
 import SearchBar from "./components/SearchBar"
+import { debounce } from 'lodash';
+import useDebounce from "./hooks/useDebounce"
+
 
 require("dotenv").config();
 const axios = require("axios");
@@ -13,9 +16,10 @@ function App() {
   const [movieSearchTerm, setMovieSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([])
 
+  const debouncedSearch = useDebounce(movieSearchTerm, 500);
+
 useEffect(() => {
 
-  console.log(movieSearchTerm)
   const handleSearch = ()=>{
     axios.get(`http://www.omdbapi.com/?s=${movieSearchTerm}&apikey=${apiKey}`).then((response)=>{
       console.log(response.data)
@@ -24,14 +28,14 @@ useEffect(() => {
 
   handleSearch()
  
-}, [movieSearchTerm])
+}, [debouncedSearch])
   
   return (
     <div className="App">
      REACT movieSearch
      <SearchBar
-        nameSearch={movieSearchTerm}
-        setNameSearch={setMovieSearchTerm}
+        searchTerm={movieSearchTerm}
+        setSearchTerm={setMovieSearchTerm}
         type="Movie"
       />
     </div>

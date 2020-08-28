@@ -1,13 +1,18 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
-import { debounce } from 'lodash';
+
+interface Props {
+  type: string;
+  searchTerm: string;
+  setSearchTerm: Function;
+}
 
 
-function SearchBar({ type, nameSearch, setNameSearch }) {
+const SearchBar: React.FC<Props> = ({ type, searchTerm, setSearchTerm }) => {
 
-  const handleSearch = debounce((text) =>{
-    setNameSearch(text)
-  },1000);
+  const handleSearch = (text) =>{
+      setSearchTerm(text)
+  };
 
   return (
     <div
@@ -23,7 +28,7 @@ function SearchBar({ type, nameSearch, setNameSearch }) {
         InputLabelProps={{
           shrink: true,
         }}
-        value={nameSearch.type}
+        value={searchTerm}
         variant="filled"
         onChange={(e) => handleSearch(e.target.value)}
       />
