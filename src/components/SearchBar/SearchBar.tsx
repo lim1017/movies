@@ -4,7 +4,7 @@ import TextField from "@material-ui/core/TextField";
 interface Props {
   type: string;
   searchTerm: string;
-  setSearchTerm: Function;
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
 }
 
 
