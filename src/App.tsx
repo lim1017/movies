@@ -20,7 +20,7 @@ function App() {
   const [nominatedMovies, setNominatedMovies] = useState([]);
   const debouncedSearch = useDebounce(movieSearchTerm, 500);
 
-
+  console.log(nominatedMovies)
 
   useEffect(() => {
     const handleSearch = () => {
@@ -35,6 +35,14 @@ function App() {
       handleSearch();
     }
   }, [debouncedSearch]);
+
+  // useEffect(() => {
+  
+  //   if (nominatedMovies.length === 5){
+  //     alert('you have 5')
+  //   }
+
+  // }, [nominatedMovies]);
 
   return (
     <div className="App">

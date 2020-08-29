@@ -1,10 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Card from "../Card/Card";
+import Modal from "../Modal/Modal"
 import "./_MovieList.scss";
 
 const MovieList = ({ data, nominatedMovies, setNominatedMovies }) => {
+  const [showModal, setShowModal] = useState({state:false, img:""})
+  
   const handleNominate = (movie) => {
+
+    if(nominatedMovies.length>= 5){
+      alert('you can only nominate 5 movies')
+      return
+    }
     setNominatedMovies([...nominatedMovies, movie]);
   };
 
@@ -23,6 +31,7 @@ const MovieList = ({ data, nominatedMovies, setNominatedMovies }) => {
             <Row>
               <Col xs={4} style={{ display: "flex" }}>
                 <img
+                  onClick={()=>setShowModal({state:true, img:movie.Poster})}
                   className="movie-poster"
                   src={movie.Poster}
                   alt="sad face"
@@ -44,12 +53,14 @@ const MovieList = ({ data, nominatedMovies, setNominatedMovies }) => {
                     Nominate{" "}
                   </button>
 
+                  <a href={`https://www.imdb.com/title/${movie.imdbID}`} target="_blank">
                   <button
                     className="movie-button"
                     style={{ marginLeft: "2em" }}
                   >
                     Details
                   </button>
+                  </a>
                 </Row>
               </Col>
             </Row>
@@ -59,7 +70,17 @@ const MovieList = ({ data, nominatedMovies, setNominatedMovies }) => {
     }
   };
 
-  return <Container>{renderMovies()}</Container>;
+  return(
+    <div>
+          <Modal showModal={showModal} setShowModal={setShowModal} />
+
+    
+        <Container>
+        {renderMovies()}
+        </Container>
+        </div>
+    
+  ) 
 };
 
 export default MovieList;
