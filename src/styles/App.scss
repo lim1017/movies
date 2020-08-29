@@ -1,5 +1,9 @@
+@import './variables';
+@import '../components/NominationList/NominationList';
+@import '../components/MovieList/MovieList';
+
 .App{
-  background-color: #37393e;
+  background-color: $color1;
 }
 
 .searchBar-container{

@@ -1,3 +1,6 @@
+@import '../../styles/variables';
+
+
 .movie-poster{
   align-self: center;
   border-radius: 10px;
@@ -27,8 +30,8 @@
 }
 
 .movie-button{
-  color:red;
-  background-color: black;
+  color: $btn-text;
+  background-color: $btn-color;
   padding: 8px;
   border-radius: 5px;
 }
@@ -39,10 +42,10 @@
 }
 
 .movie-button:disabled{
-  color:red;
+  color:$btn-disabled-text;
   transform: scale(1);
   cursor: not-allowed;
-  background-color:rgb(42, 42, 42);
+  background-color:$btn-disabled-color;
   padding: 8px;
   border-radius: 5px;
   text-decoration: line-through;

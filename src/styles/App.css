@@ -1,0 +1,133 @@
+.nomination-poster {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  border-radius: 10px;
+}
+
+.nomination-poster:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  cursor: pointer;
+}
+
+.nomination-details-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.nomination-title {
+  font-size: 14px;
+  margin-top: 3px;
+  font-weight: 800;
+}
+
+.nomination-details {
+  font-size: 12px;
+  margin-top: 8px;
+  font-weight: 800;
+}
+
+.nomination-buttons-container {
+  margin-top: 5%;
+}
+
+.nomination-button {
+  color: red;
+  background-color: black;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.nomination-button:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  cursor: pointer;
+}
+
+.nomination-button:disabled {
+  color: red;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  cursor: not-allowed;
+  background-color: #2a2a2a;
+  padding: 8px;
+  border-radius: 5px;
+  text-decoration: line-through;
+}
+
+.movie-poster {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  border-radius: 10px;
+}
+
+.movie-poster:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  cursor: pointer;
+}
+
+.movie-title {
+  font-size: 24px;
+  margin-top: 3px;
+  font-weight: 800;
+}
+
+.movie-details {
+  margin-top: 8px;
+  font-weight: 800;
+}
+
+.movie-buttons-container {
+  margin-top: 20%;
+}
+
+.movie-button {
+  color: red;
+  background-color: black;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.movie-button:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  cursor: pointer;
+}
+
+.movie-button:disabled {
+  color: red;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  cursor: not-allowed;
+  background-color: #2a2a2a;
+  padding: 8px;
+  border-radius: 5px;
+  text-decoration: line-through;
+}
+
+.App {
+  background-color: #37393e;
+}
+
+.searchBar-container {
+  margin-bottom: 2%;
+}
+
+.nomination-container {
+  position: -webkit-sticky;
+  /* Safari */
+  position: sticky;
+  top: 10px;
+}
+/*# sourceMappingURL=App.css.map */
