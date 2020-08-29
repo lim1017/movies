@@ -1,1 +1,15 @@
-/* No CSS *//*# sourceMappingURL=App.css.map */
+.App {
+  background-color: #37393e;
+}
+
+.searchBar-container {
+  margin-bottom: 2%;
+}
+
+.nomination-container {
+  position: -webkit-sticky;
+  /* Safari */
+  position: sticky;
+  top: 10px;
+}
+/*# sourceMappingURL=App.css.map */

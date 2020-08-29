@@ -16,20 +16,21 @@ const SearchBar: React.FC<Props> = ({ type, searchTerm, setSearchTerm }) => {
 
   return (
     <div
-      style={{ width: "80%", margin: "auto" }}
+      style={{ width: "80%", margin: "auto", color:"white" }}
       className="searchbar-container"
     >
       <TextField
         data-cy={type}
-        id="filled-full-width"
+        id="outlined-full-width"
         placeholder={`Search by ${type} name`}
         fullWidth
+        style={{ backgroundColor:"white", borderRadius:"10px" }}
         margin="normal"
         InputLabelProps={{
           shrink: true,
         }}
         value={searchTerm}
-        variant="filled"
+        variant="outlined"
         onChange={(e) => handleSearch(e.target.value)}
       />
     </div>

@@ -1,38 +1,60 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import Card from "../Card/Card";
+import "./_MovieList.scss";
 
-// interface Props {
-//   data: object[];
-// }
+const MovieList = ({ data, nominatedMovies, setNominatedMovies }) => {
+  const handleNominate = (movie) => {
+    setNominatedMovies([...nominatedMovies, movie]);
+  };
 
-// type MovieListProps= {
-//   data: object[];
-// }
-
-const MovieList= ({ data }) => {
-  console.log(data);
 
   const renderMovies = () => {
     if (data.length !== 0) {
       return data.map((movie) => {
-        return (
-          <Row>
-            <Col><img src={movie.Poster} alt="sad face" width="40%" height="85%"></img></Col>
-            <Col>
-              <Row>
-                Title:{movie.Title}
-              </Row>
-              <Row>
-                Release:{movie.Year}
-              </Row> 
-              <Row>
-                <button>Nominate</button>
-                <button>Details</button>
+        let checkIfNominated = nominatedMovies.filter((nominatedMovie) => {
+          return movie.imdbID === nominatedMovie.imdbID;
+        });
 
-              </Row>
-            </Col>
-          </Row>
-        )
+        let isDisabled = checkIfNominated.length !== 0 ? true : false;
+
+        return (
+          <Card small={true} key={movie.imdbID}>
+            <Row>
+              <Col xs={4} style={{ display: "flex" }}>
+                <img
+                  className="movie-poster"
+                  src={movie.Poster}
+                  alt="sad face"
+                  width="80%"
+                  height="90%"
+                />
+              </Col>
+
+              <Col>
+                <Row className="movie-title">{movie.Title}</Row>
+                <Row className="movie-details">{movie.Year}</Row>
+                <Row className="movie-buttons-container">
+                  <button
+                    // type="button"
+                    className="movie-button"
+                    onClick={() => handleNominate(movie)}
+                    disabled={isDisabled}
+                  >
+                    Nominate{" "}
+                  </button>
+
+                  <button
+                    className="movie-button"
+                    style={{ marginLeft: "2em" }}
+                  >
+                    Details
+                  </button>
+                </Row>
+              </Col>
+            </Row>
+          </Card>
+        );
       });
     }
   };

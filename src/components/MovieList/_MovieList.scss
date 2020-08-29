@@ -1,0 +1,50 @@
+.movie-poster{
+  align-self: center;
+  border-radius: 10px;
+}
+
+.movie-poster:hover{
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.movie-title{
+  font-size: 24px;
+  margin-top: 3px;
+  font-weight: 800;
+  // font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.movie-details{
+  // font-size: 24px;
+  margin-top: 8px;
+  font-weight: 800;
+
+}
+
+.movie-buttons-container{
+  margin-top: 20%;
+}
+
+.movie-button{
+  color:red;
+  background-color: black;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.movie-button:hover{
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.movie-button:disabled{
+  color:red;
+  transform: scale(1);
+  cursor: not-allowed;
+  background-color: black;
+  padding: 8px;
+  border-radius: 5px;
+  text-decoration: line-through;
+
+}
