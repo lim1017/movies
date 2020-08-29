@@ -5,7 +5,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import useDebounce from "./hooks/useDebounce";
 import MovieList from "./components/MovieList/MovieList";
-import Paper from "./components/Paper/Paper";
+import NominationList from "./components/NominationList/NominationList";
+
 import Card from "./components/Card/Card";
 
 require("dotenv").config();
@@ -17,10 +18,9 @@ function App() {
   const [movieSearchTerm, setMovieSearchTerm] = useState<string>("dragon");
   const [searchResults, setSearchResults] = useState<object[]>([]);
   const [nominatedMovies, setNominatedMovies] = useState([]);
-
-
-
   const debouncedSearch = useDebounce(movieSearchTerm, 500);
+
+
 
   useEffect(() => {
     const handleSearch = () => {
@@ -55,14 +55,13 @@ function App() {
           </Col>
 
           <Col xs={5}>
-            <div
-              className="nomination-container"
-              style={{
-                backgroundColor: "blue",
-                width: "100%",
-                height: "100px",
-              }}
-            ></div>
+          <div className="nomination-container">
+
+            <Card nomination className="nomination-container">
+              <NominationList nominatedMovies={nominatedMovies} setNominatedMovies={setNominatedMovies} />
+            </Card>
+
+          </div>
           </Col>
         </Row>
       </Container>

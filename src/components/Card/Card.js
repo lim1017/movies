@@ -12,13 +12,28 @@ const useStyles = makeStyles({
     border: "3px solid black",
     borderRadius:"5px",
     boxShadow: "10px 5px 5px red",
-    padding: 0
+    padding: 0,
+    height:"80vh",
+    overflow:"scroll"
   },
   small:{
     border: "1px solid black",
     borderRadius:"5px",
     boxShadow: "10px 5px 5px grey",
-    marginBottom:"10px"
+    marginBottom:"5px",
+    marginTop:"8px",
+    padding:"0px"
+  },
+  nomination:{
+    border: "3px solid black",
+    borderRadius:"5px",
+    boxShadow: "10px 5px 5px red",
+    padding: 0,
+    height:"80vh",
+    overflow:"scroll"
+  },
+  noPadding:{
+    padding:"0px !important",
   }
 });
 
@@ -26,11 +41,15 @@ export default function SimpleCard(props) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
-  const style = props.small ? classes.small : classes.root
+  // const style = props.small ? classes.small : classes.root
+
+  const style = props.small ? classes.small : props.nomination ? classes.nomination : classes.root
+
+  const padding = props.noPadding ? classes.noPadding : ""
 
   return (
     <Card className={style}>
-      <CardContent>
+      <CardContent className={padding}>
        {props.children}
       </CardContent>
     </Card>

@@ -1,48 +1,54 @@
-.movie-poster{
+.nomination-poster{
   align-self: center;
   border-radius: 10px;
 }
 
-.movie-poster:hover{
+.nomination-poster:hover{
   transform: scale(1.1);
   cursor: pointer;
 }
 
-.movie-title{
-  font-size: 24px;
+.nomination-details-container{
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center;
+}
+
+.nomination-title{
+  font-size: 14px;
   margin-top: 3px;
   font-weight: 800;
   // font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.movie-details{
-  // font-size: 24px;
+.nomination-details{
+  font-size: 12px;
   margin-top: 8px;
   font-weight: 800;
 
 }
 
-.movie-buttons-container{
-  margin-top: 20%;
+.nomination-buttons-container{
+  margin-top: 5%;
 }
 
-.movie-button{
+.nomination-button{
   color:red;
   background-color: black;
-  padding: 8px;
+  padding: 5px;
   border-radius: 5px;
 }
 
-.movie-button:hover{
+.nomination-button:hover{
   transform: scale(1.1);
   cursor: pointer;
 }
 
-.movie-button:disabled{
+.nomination-button:disabled{
   color:red;
   transform: scale(1);
   cursor: not-allowed;
-  background-color:rgb(42, 42, 42);
+  background-color: black;
   padding: 8px;
   border-radius: 5px;
   text-decoration: line-through;
