@@ -56,13 +56,13 @@ function App() {
       </div>
       <Container fluid>
         <Row>
-          <Col xs={7}>
+          <Col xs={12} md={7}>
             <Card>
               <MovieList data={searchResults} nominatedMovies={nominatedMovies} setNominatedMovies={setNominatedMovies} />
             </Card>
           </Col>
 
-          <Col xs={5}>
+          <Col xs={12} md={4}>
           <div className="nomination-container">
 
             <Card nomination className="nomination-container">

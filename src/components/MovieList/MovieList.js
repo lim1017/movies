@@ -41,8 +41,10 @@ const MovieList = ({ data, nominatedMovies, setNominatedMovies }) => {
               </Col>
 
               <Col>
+              <div>
                 <Row className="movie-title">{movie.Title}</Row>
                 <Row className="movie-details">{movie.Year}</Row>
+              </div>
                 <Row className="movie-buttons-container">
                   <button
                     // type="button"
