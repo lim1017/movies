@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import useDebounce from "./hooks/useDebounce";
 import MovieList from "./components/MovieList/MovieList";
 import NominationList from "./components/NominationList/NominationList";
+import AppBar from "./components/AppBar/AppBar"
 
 import Card from "./components/Card/Card";
 
@@ -36,17 +37,11 @@ function App() {
     }
   }, [debouncedSearch]);
 
-  // useEffect(() => {
-  
-  //   if (nominatedMovies.length === 5){
-  //     alert('you have 5')
-  //   }
-
-  // }, [nominatedMovies]);
 
   return (
     <div className="App">
-      <h1 style={{display:"flex", justifyContent:"center", color:"white"}}>REACT movieSearch</h1>
+      <AppBar />
+      {/* <h1 style={{display:"flex", justifyContent:"center", color:"white"}}>REACT movieSearch</h1> */}
       <div className="searchBar-container">
         <SearchBar
           searchTerm={movieSearchTerm}
@@ -62,7 +57,7 @@ function App() {
             </Card>
           </Col>
 
-          <Col xs={12} md={4}>
+          <Col xs={12} md={5}>
           <div className="nomination-container">
 
             <Card nomination className="nomination-container">

@@ -61,7 +61,7 @@ const NominationList = ({ nominatedMovies, setNominatedMovies }) => {
   return <Container>
     <div style={{display:"flex", justifyContent:"space-between"}}>
     <h3>Nomination List</h3>
-    {nominatedMovies.length === 5 ? <button className="nomination-button">submit</button> : null}
+    {nominatedMovies.length === 5 ? <button className="nomination-button">Save/Submit</button> : null}
     </div>
     {renderMovies()}
     </Container>;

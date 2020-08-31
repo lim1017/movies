@@ -78,6 +78,7 @@ const MovieList = ({ data, nominatedMovies, setNominatedMovies }) => {
 
     
         <Container>
+        <h3>Search results</h3>
         {renderMovies()}
         </Container>
         </div>
