@@ -6,6 +6,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+let mainContainerHeight = window.innerWidth < 750 ? "50vh" : "80vh"
+
+
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -13,7 +16,7 @@ const useStyles = makeStyles({
     borderRadius:"5px",
     boxShadow: "10px 5px 5px red",
     padding: 0,
-    height:"80vh",
+    height: mainContainerHeight,
     overflow:"scroll"
   },
   small:{
@@ -29,7 +32,7 @@ const useStyles = makeStyles({
     borderRadius:"5px",
     boxShadow: "10px 5px 5px red",
     padding: 0,
-    height:"80vh",
+    height:mainContainerHeight,
     overflow:"scroll"
   },
   noPadding:{
@@ -46,6 +49,8 @@ export default function SimpleCard(props) {
   const style = props.small ? classes.small : props.nomination ? classes.nomination : classes.root
 
   const padding = props.noPadding ? classes.noPadding : ""
+
+  console.log()
 
   return (
     <Card className={style}>

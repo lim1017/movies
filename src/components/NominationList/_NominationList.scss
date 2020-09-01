@@ -58,9 +58,24 @@
 
 }
 
+.nomination-instructions{
+  position:relative; 
+  top:5em;
+  font-size: 24px;
+  font-weight: 800;
+  text-align: center;
+
+}
+
 @media screen and (max-width: 750px) {
 
 .makeStyles-nomination-7{
   height: 50vh !important;
 }
+
+.nomination-instructions{
+  font-size: 18px;
+}
+
+
 }

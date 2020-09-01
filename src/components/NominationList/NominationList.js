@@ -1,26 +1,39 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Card from "../Card/Card";
+import serverApi from "../../apis/serverApi"
+
 import "./_NominationList.scss";
 
-const NominationList = ({ nominatedMovies, setNominatedMovies }) => {
+const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn }) => {
+
+  let isUserLogged = isLoggedIn.name !== "" && isLoggedIn.name !== null ? true : false
+  const userId = localStorage.getItem('id');
+
 
   const handleDelete = (movieID) => {
-    
     let copy= [...nominatedMovies]
     for (let i = 0; i<nominatedMovies.length; i++){
       if (nominatedMovies[i].imdbID===movieID){
         copy.splice(i,1)
         setNominatedMovies(copy)
       }
-    }
-
-    
+    }    
   };
+
+  const submitNominations = async ()=>{
+    try{
+      await serverApi.patch(`/users/${userId}`, {nominations: JSON.stringify(nominatedMovies)})
+      console.log('success')
+    }
+    catch{
+      console.log('error')
+    }
+  }
 
 
   const renderMovies = () => {
-    if (nominatedMovies.length !== 0) {
+    if (nominatedMovies?.length !== 0) {
       return nominatedMovies.map((movie) => {
        
 
@@ -55,15 +68,25 @@ const NominationList = ({ nominatedMovies, setNominatedMovies }) => {
           </Card>
         );
       });
+    } else {
+      return (
+        <div className="nomination-instructions">
+          Nominate 5 movies for the Shoppies!
+        </div>
+      )
     }
   };
 
   return <Container>
     <div style={{display:"flex", justifyContent:"space-between"}}>
     <h3>Nomination List</h3>
-    {nominatedMovies.length === 5 ? <button className="nomination-button">Save/Submit</button> : null}
+    {
+    nominatedMovies?.length === 5 && isUserLogged ? 
+    <button className="nomination-button" onClick={submitNominations}>Save/Submit</button> 
+    : null}
     </div>
     {renderMovies()}
+
     </Container>;
 };
 

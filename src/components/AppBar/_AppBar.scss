@@ -1,0 +1,24 @@
+@import '../../styles/variables';
+
+
+.app-bar-button{
+  color: white;
+  background-color: $btn-color;
+  padding: $btn-padding-movie;
+  border-radius: 5px;
+}
+
+.app-bar-button:hover{
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.app-bar-button:disabled{
+
+  transform: scale(1);
+  cursor: not-allowed;
+  background-color:$btn-disabled-color;
+  padding: $btn-padding-movie;
+  border-radius: 5px;
+
+}

@@ -3,9 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import TextField from '@material-ui/core/TextField';
-import axios from 'axios'
 import Swal from 'sweetalert2'
 import serverApi from "../../apis/serverApi"
+import './_AppBar.scss'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,59 +24,60 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-function ButtonAppBar(props) {
+function ButtonAppBar({isLoggedIn, setIsLoggedIn}) {
   const classes = useStyles();
   const [ userTextField, setUserTextField ] = useState("")
   
-  const [ isLoggedIn, setIsLoggedIn ] = useState(false)
 
+  let isDisabled = userTextField === "" ? true : false;
 
   useEffect(() => {
     
-    const userId = localStorage.getItem('id');
     const userName = localStorage.getItem('username');
-    console.log(userName)
-    setIsLoggedIn({name:userName, id: userId})
 
-  }, [])
+    const fetchUser = async ()=>{
+     const response= await serverApi.get(`/users/${userName}`)
 
-  useEffect(() => {
-    
-    
+     setIsLoggedIn(response.data[0])
+    }
+
+    fetchUser()
+
+
   }, [])
 
   function login() {
+    console.log(userTextField)
     Promise.all([serverApi.get(`/users/${userTextField}`)])
       .then(response => {
-        if (response[0].data.length === 0) {
-
-          Swal.fire(
-            'Error user does not exist!',
-            'Please Register',
-            'error'
-          )
-
-        } else {
+    
           const userz = response[0].data[0];
           localStorage.setItem("username", userz.username);
           localStorage.setItem("id", userz.user_id);
-          setIsLoggedIn({ name: userz.username, id: userz.user_id });
+          // setIsLoggedIn({ name: userz.username, id: userz.user_id, nominations:userz.nominations });
+          console.log(userz)
+          setIsLoggedIn(userz)
 
           Swal.fire(
             `Welcome ${userz.username}`,
             '',
             'success'
           )
-        }
+        
       })
       .catch(error => {
         console.log(error);
+        Swal.fire(
+          'Error user does not exist!',
+          'Please Register',
+          'error'
+        )
       });
   }
 
   function logout() {
     localStorage.clear();
-    setIsLoggedIn(false)
+    setIsLoggedIn({username:"", user_id: "", nominations:[]})
   }
 
   const register = async()=>{
@@ -97,7 +98,7 @@ function ButtonAppBar(props) {
 
   const renderLoginLogout = ()=>{
 
-    if (!isLoggedIn || isLoggedIn.name === null){
+    if (isLoggedIn.username === "" || isLoggedIn.username === null){
       return (
         <div>
           <TextField 
@@ -107,16 +108,18 @@ function ButtonAppBar(props) {
           onChange={e=>setUserTextField(e.target.value)}
           />
           <button 
-          className="movie-button" 
+          className="app-bar-button" 
           style={{ marginLeft: "2em" }}
           onClick={()=>login()}
+          disabled={isDisabled}
           >
             Login
           </button>
           <button 
-          className="movie-button" 
+          className="app-bar-button" 
           style={{ marginLeft: "2em" }}
           onClick={register}
+          disabled={isDisabled}
           >
             Register
           </button>
@@ -126,9 +129,9 @@ function ButtonAppBar(props) {
     } else {
       return (
         <div style={{display:"flex"}}>
-          <h3 style={{alignSelf:"center"}}>Hello {isLoggedIn.name}</h3>
+          <h3 style={{alignSelf:"center"}}>Hello {isLoggedIn.username}</h3>
           <button 
-          className="movie-button" 
+          className="app-bar-button" 
           style={{ marginLeft: "2em" }}
           onClick={logout}
           >
@@ -143,7 +146,7 @@ function ButtonAppBar(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" color="secondary">
         <Toolbar>
           <div style={{width:"100%", display:"flex", justifyContent:"space-between"}}>
             <div>

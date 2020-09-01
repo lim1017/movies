@@ -7,7 +7,7 @@ import useDebounce from "./hooks/useDebounce";
 import MovieList from "./components/MovieList/MovieList";
 import NominationList from "./components/NominationList/NominationList";
 import AppBar from "./components/AppBar/AppBar"
-import movieDBapi from "./apis//movieDBapi"
+import movieDBapi from "./apis/movieDBapi"
 
 import Card from "./components/Card/Card";
 
@@ -16,12 +16,19 @@ require("dotenv").config();
 const apiKey = process.env.REACT_APP_OMDB;
 
 function App() {
-  const [movieSearchTerm, setMovieSearchTerm] = useState<string>("dragon");
-  const [searchResults, setSearchResults] = useState<object[]>([]);
+  const [movieSearchTerm, setMovieSearchTerm] = useState("dragon");
+  const [searchResults, setSearchResults] = useState([]);
   const [nominatedMovies, setNominatedMovies] = useState([]);
+  const [ isLoggedIn, setIsLoggedIn ] = useState({name:"", id: "", nominations:[]})
+
   const debouncedSearch = useDebounce(movieSearchTerm, 500);
 
-  console.log(nominatedMovies)
+
+  useEffect(() => {
+    console.log(isLoggedIn.nominations)
+    setNominatedMovies(isLoggedIn.nominations)
+
+  }, [isLoggedIn])
 
   useEffect(() => {
     const handleSearch = () => {
@@ -40,8 +47,7 @@ function App() {
 
   return (
     <div className="App">
-      <AppBar />
-      {/* <h1 style={{display:"flex", justifyContent:"center", color:"white"}}>REACT movieSearch</h1> */}
+      <AppBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <div className="searchBar-container">
         <SearchBar
           searchTerm={movieSearchTerm}
@@ -61,7 +67,11 @@ function App() {
           <div className="nomination-container">
 
             <Card nomination className="nomination-container">
-              <NominationList nominatedMovies={nominatedMovies} setNominatedMovies={setNominatedMovies} />
+              <NominationList 
+              nominatedMovies={nominatedMovies} 
+              setNominatedMovies={setNominatedMovies} 
+              isLoggedIn={isLoggedIn} 
+              />
             </Card>
 
           </div>
