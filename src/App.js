@@ -19,13 +19,13 @@ function App() {
   const [movieSearchTerm, setMovieSearchTerm] = useState("dragon");
   const [searchResults, setSearchResults] = useState([]);
   const [nominatedMovies, setNominatedMovies] = useState([]);
-  const [ isLoggedIn, setIsLoggedIn ] = useState({name:"", id: "", nominations:[]})
+  const [ isLoggedIn, setIsLoggedIn ] = useState({username:"", user_id: "", nominations:[]})
 
   const debouncedSearch = useDebounce(movieSearchTerm, 500);
 
 
   useEffect(() => {
-    console.log(isLoggedIn.nominations)
+    console.log(isLoggedIn)
     setNominatedMovies(isLoggedIn.nominations)
 
   }, [isLoggedIn])

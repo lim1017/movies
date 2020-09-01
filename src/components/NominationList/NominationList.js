@@ -7,7 +7,7 @@ import "./_NominationList.scss";
 
 const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn }) => {
 
-  let isUserLogged = isLoggedIn.name !== "" && isLoggedIn.name !== null ? true : false
+  let isUserLogged = isLoggedIn?.username !== "" && isLoggedIn?.username !== null ? true : false
   const userId = localStorage.getItem('id');
 
 

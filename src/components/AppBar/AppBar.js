@@ -41,7 +41,10 @@ function ButtonAppBar({isLoggedIn, setIsLoggedIn}) {
      setIsLoggedIn(response.data[0])
     }
 
-    fetchUser()
+    if(userName!==null){
+      fetchUser()
+
+    }
 
 
   }, [])
@@ -98,7 +101,7 @@ function ButtonAppBar({isLoggedIn, setIsLoggedIn}) {
 
   const renderLoginLogout = ()=>{
 
-    if (isLoggedIn.username === "" || isLoggedIn.username === null){
+    if (isLoggedIn?.username === "" || isLoggedIn?.username === null){
       return (
         <div>
           <TextField 
@@ -129,7 +132,7 @@ function ButtonAppBar({isLoggedIn, setIsLoggedIn}) {
     } else {
       return (
         <div style={{display:"flex"}}>
-          <h3 style={{alignSelf:"center"}}>Hello {isLoggedIn.username}</h3>
+          <h3 style={{alignSelf:"center"}}>Hello {isLoggedIn?.username}</h3>
           <button 
           className="app-bar-button" 
           style={{ marginLeft: "2em" }}
