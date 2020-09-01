@@ -7,11 +7,11 @@ import useDebounce from "./hooks/useDebounce";
 import MovieList from "./components/MovieList/MovieList";
 import NominationList from "./components/NominationList/NominationList";
 import AppBar from "./components/AppBar/AppBar"
+import movieDBapi from "./apis//movieDBapi"
 
 import Card from "./components/Card/Card";
 
 require("dotenv").config();
-const axios = require("axios");
 
 const apiKey = process.env.REACT_APP_OMDB;
 
@@ -25,8 +25,8 @@ function App() {
 
   useEffect(() => {
     const handleSearch = () => {
-      axios
-        .get(`http://www.omdbapi.com/?s=${movieSearchTerm}&apikey=${apiKey}`)
+      movieDBapi
+        .get(`/?s=${movieSearchTerm}&apikey=${apiKey}`)
         .then((response) => {
           setSearchResults(response.data.Search);
         });
