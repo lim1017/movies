@@ -3,10 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-import { useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-
-
 
 const useStyles = makeStyles((theme)=> {
 
@@ -17,7 +13,7 @@ const useStyles = makeStyles((theme)=> {
       borderRadius:"5px",
       boxShadow: "10px 5px 5px red",
       padding: 0,
-      height: "50vh",
+      height: "60vh",
       overflow:"scroll",
       [theme.breakpoints.up(750)]: {
         height: "80vh"                   // secondary
@@ -36,7 +32,7 @@ const useStyles = makeStyles((theme)=> {
       borderRadius:"5px",
       boxShadow: "10px 5px 5px red",
       padding: 0,
-      height:"50vh",
+      height:"60vh",
       overflow:"scroll",
       [theme.breakpoints.up(750)]: {
         height: "80vh"                   // secondary

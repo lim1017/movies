@@ -5,7 +5,7 @@ import serverApi from "../../apis/serverApi"
 
 import "./_NominationList.scss";
 
-const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn }) => {
+const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn, share }) => {
 
   let isUserLogged = isLoggedIn?.username !== "" && isLoggedIn?.username !== null ? true : false
   const userId = localStorage.getItem('id');
@@ -55,6 +55,7 @@ const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn }) => 
               </Col>
               <Col className="nomination-details-container">
               <Row className="nomination-buttons-container">
+                 {share ? null:   
                   <button
                     className="nomination-button"
                     style={{ marginLeft: "2em" }}
@@ -62,6 +63,7 @@ const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn }) => 
                   >
                     Delete
                   </button>
+                 }
                 </Row>
               </Col>
             </Row>
@@ -81,7 +83,7 @@ const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn }) => 
     <div style={{display:"flex", justifyContent:"space-between"}}>
     <h3>Nomination List</h3>
     {
-    nominatedMovies?.length === 5 && isUserLogged ? 
+    nominatedMovies?.length === 5 && isUserLogged && !share ? 
     <button className="nomination-button" onClick={submitNominations}>Save/Submit</button> 
     : null}
     </div>
