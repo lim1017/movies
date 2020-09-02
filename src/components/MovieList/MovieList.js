@@ -28,7 +28,7 @@ const MovieList = ({ data, nominatedMovies, setNominatedMovies }) => {
 
         return (
           <Card small={true} key={movie.imdbID}>
-            <Row>
+            <Row className="individual-movie-card">
               <Col xs={4} style={{ display: "flex" }}>
                 <img
                   onClick={()=>setShowModal({state:true, img:movie.Poster})}
@@ -40,7 +40,7 @@ const MovieList = ({ data, nominatedMovies, setNominatedMovies }) => {
                 />
               </Col>
 
-              <Col>
+              <Col className="movie-details-and-buttons-container">
               <div>
                 <Row className="movie-title">{movie.Title}</Row>
                 <Row className="movie-details">{movie.Year}</Row>
@@ -65,6 +65,9 @@ const MovieList = ({ data, nominatedMovies, setNominatedMovies }) => {
                   </a>
                 </Row>
               </Col>
+
+
+
             </Row>
           </Card>
         );

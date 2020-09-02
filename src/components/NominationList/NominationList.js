@@ -5,7 +5,7 @@ import serverApi from "../../apis/serverApi"
 
 import "./_NominationList.scss";
 
-const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn, share }) => {
+const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn, share, activeUser }) => {
 
   let isUserLogged = isLoggedIn?.username !== "" && isLoggedIn?.username !== null ? true : false
   const userId = localStorage.getItem('id');
@@ -40,7 +40,7 @@ const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn, share
 
         return (
           <Card small noPadding key={movie.imdbID}>
-            <Row>
+            <Row className="individual-nomination-card">
               <Col xs={4} className="nomination-details-container">
                 <img
                   className="nomination-poster"
@@ -61,7 +61,7 @@ const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn, share
                   <a href={`https://www.imdb.com/title/${movie.imdbID}`} target="_blank">
                   <button
                     className="movie-button"
-                    style={{ marginLeft: "2em" }}
+                    style={{ marginLeft: "0.7em" }}
                   >
                     Details
                   </button>
@@ -69,7 +69,7 @@ const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn, share
                  :   
                   <button
                     className="nomination-button"
-                    style={{ marginLeft: "2em" }}
+                    style={{ marginLeft: "0.7em" }}
                     onClick={()=>handleDelete(movie.imdbID)}
                   >
                     Delete
@@ -92,10 +92,15 @@ const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn, share
 
   return <Container>
     <div style={{display:"flex", justifyContent:"space-between"}}>
-    <h3>Nomination List</h3>
+    <p className="nomination-page-title"> {share ? activeUser +"'s" : null} Nomination List</p>
     {
     nominatedMovies?.length === 5 && isUserLogged && !share ? 
     <button className="nomination-button" onClick={submitNominations}>Save/Submit</button> 
+    : null}
+
+{
+    nominatedMovies?.length === 5 && !isUserLogged && !share ? 
+    <button className="login-register-prompt-button" disabled >Login/Register to Vote</button> 
     : null}
     </div>
     {renderMovies()}

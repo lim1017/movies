@@ -1,5 +1,12 @@
 @import '../../styles/variables';
 
+.individual-nomination-card{
+  justify-content: space-between;
+}
+
+.movie-details-and-buttons-container{
+
+}
 
 .movie-poster{
   align-self: center;
@@ -13,21 +20,21 @@
 
 .movie-title{
   font-size: 24px;
-  margin-top: 8px;
+  // margin-top: 8px;
   font-weight: 800;
   // font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .movie-details{
   // font-size: 24px;
-  margin-top: 8px;
+  // margin-top: 8px;
   font-weight: 800;
 }
 
 .movie-buttons-container{
   // margin-top: 23%;
-  position: absolute;
-  bottom:5%;
+  // position: absolute;
+  // bottom:5%;
 }
 
 .movie-button{
@@ -75,14 +82,14 @@
 
 .movie-title{
   font-size: 20px;
-  margin-top: 8px;
+  // margin-top: 8px;
   font-weight: 800;
   // font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .movie-details{
   font-size: 18px;
-  margin-top: 8px;
+  // margin-top: 8px;
   font-weight: 800;
 }
 
@@ -110,14 +117,14 @@
 
 .movie-title{
   font-size: 12px;
-  margin-top: 8px;
+  // margin-top: 8px;
   font-weight: 800;
   // font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .movie-details{
   font-size: 10px;
-  margin-top: 8px;
+  // margin-top: 8px;
   font-weight: 800;
 }
 

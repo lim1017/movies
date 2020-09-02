@@ -22,3 +22,42 @@
   border-radius: 5px;
 
 }
+
+.page-title{
+  font-size: 36px;
+  font-weight: bold;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+
+.login-components-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media screen and (max-width: 750px) {
+  .page-title{
+    font-size: 24px;
+  }
+
+  .appbar-textfield{
+    padding: 6px !important;
+  }
+ 
+  .app-bar-button{
+    padding: 1px;
+    border-radius: 3px;
+
+  }
+  
+  .app-bar-button:disabled{
+    border-radius: 3px;
+    padding: 1px;
+  
+  }
+  
+  
+}

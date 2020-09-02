@@ -11,9 +11,10 @@ const PublicProfile = (props) => {
   const [nominatedMovies, setNominatedMovies] = useState([]);
   const [isUserExist, setIsUserExist] = useState(true)
 
+  const activeUser = match.params.username;
+
+
   useEffect(() => {
-    const activeUser = match.params.username;
-    console.log(activeUser)
     const fetchUser = async () => {
 
       try {
@@ -45,6 +46,7 @@ const PublicProfile = (props) => {
         nominatedMovies={nominatedMovies} 
         setNominatedMovies={setNominatedMovies} 
         share={true}
+        activeUser={activeUser}
       />
       </Card>
     </div>

@@ -50,7 +50,6 @@ function ButtonAppBar({isLoggedIn, setIsLoggedIn}) {
   }, [])
 
   function login() {
-    console.log(userTextField)
     Promise.all([serverApi.get(`/users/${userTextField}`)])
       .then(response => {
     
@@ -76,7 +75,7 @@ function ButtonAppBar({isLoggedIn, setIsLoggedIn}) {
           'error'
         )
       });
-  }
+  } 
 
   function logout() {
     localStorage.clear();
@@ -103,16 +102,19 @@ function ButtonAppBar({isLoggedIn, setIsLoggedIn}) {
 
     if (isLoggedIn?.username === "" || isLoggedIn?.username === null){
       return (
-        <div>
+        <div className="login-components-container">
           <TextField 
-          style={{ backgroundColor:"white", borderRadius:"10px" }}
+          style={{ backgroundColor:"white", borderRadius:"10px", flexDirection:"row", marginLeft:"0.5em" }}
           id="outlined-basic" variant="outlined" 
           placeholder="Username"
           onChange={e=>setUserTextField(e.target.value)}
+          inputProps={{
+            className:"appbar-textfield"
+          }}
           />
           <button 
           className="app-bar-button" 
-          style={{ marginLeft: "2em" }}
+          style={{ marginLeft: "0.5em" }}
           onClick={()=>login()}
           disabled={isDisabled}
           >
@@ -120,7 +122,7 @@ function ButtonAppBar({isLoggedIn, setIsLoggedIn}) {
           </button>
           <button 
           className="app-bar-button" 
-          style={{ marginLeft: "2em" }}
+          style={{ marginLeft: "0.5em" }}
           onClick={register}
           disabled={isDisabled}
           >
@@ -135,7 +137,7 @@ function ButtonAppBar({isLoggedIn, setIsLoggedIn}) {
           <h3 style={{alignSelf:"center"}}>Hello {isLoggedIn?.username}</h3>
           <button 
           className="app-bar-button" 
-          style={{ marginLeft: "2em" }}
+          // style={{ marginLeft: "2em" }}
           onClick={logout}
           >
               Logout
@@ -151,9 +153,9 @@ function ButtonAppBar({isLoggedIn, setIsLoggedIn}) {
     <div className={classes.root}>
       <AppBar position="static" color="secondary">
         <Toolbar>
-          <div style={{width:"100%", display:"flex", justifyContent:"space-between"}}>
+          <div style={{width:"100vw", display:"flex", justifyContent:"space-between"}}>
             <div>
-              <h1>The Shoppies</h1>
+              <p className="page-title">Shoppies</p>
             </div>
 
             {renderLoginLogout()}

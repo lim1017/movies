@@ -1,5 +1,8 @@
 @import '../../styles/variables';
 
+.individual-nomination-card{
+  justify-content: space-between;
+}
 
 .nomination-poster{
   align-self: center;
@@ -67,6 +70,28 @@
 
 }
 
+.login-register-prompt-button{
+  color: $btn-text;
+  background-color: $btn-color;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.login-register-prompt-button:disabled{
+  color: $btn-disabled-text;
+  transform: scale(1);
+  cursor: not-allowed;
+  background-color: $btn-disabled-color;
+  padding: 8px;
+  border-radius: 5px;
+
+}
+
+.nomination-page-title{
+  font-size: 26px;
+  font-weight: 800;
+}
+
 @media screen and (max-width: 750px) {
 
 .makeStyles-nomination-7{
@@ -75,6 +100,10 @@
 
 .nomination-instructions{
   font-size: 18px;
+}
+
+.nomination-page-title{
+  font-size: 18px;  
 }
 
 

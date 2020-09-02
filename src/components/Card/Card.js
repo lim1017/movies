@@ -44,9 +44,15 @@ const useStyles = makeStyles((theme)=> {
       boxShadow: "10px 5px 5px red",
       padding: 0,
       height:"80vh",
-      width:"50vw",
+      width:"90vw",
       overflow:"scroll",
-      
+      display:"flex",
+      alignSelf:"center",
+      [theme.breakpoints.up(750)]: {
+        height:"80vh",
+        width:"50vw"
+       }
+
     },
     noPadding:{
       padding:"0px !important",
