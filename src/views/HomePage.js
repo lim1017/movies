@@ -25,8 +25,9 @@ function App() {
 
 
   useEffect(() => {
-    console.log(isLoggedIn)
-    setNominatedMovies(isLoggedIn.nominations)
+    if(Array.isArray(isLoggedIn.nominations)){
+      setNominatedMovies(isLoggedIn.nominations)
+    }
 
   }, [isLoggedIn])
 

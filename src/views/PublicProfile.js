@@ -6,20 +6,27 @@ import Card from "../components/Card/Card";
 import '../styles/App.scss'
 
 
-const PublicProfile = ({ match }) => {
-
+const PublicProfile = (props) => {
+  const { match, history } = props
   const [nominatedMovies, setNominatedMovies] = useState([]);
-
+  const [isUserExist, setIsUserExist] = useState(true)
 
   useEffect(() => {
     const activeUser = match.params.username;
-
+    console.log(activeUser)
     const fetchUser = async () => {
-      const response = await serverAPI.get(`/users/${activeUser}`);
 
-      const { nominations, user_id, username } = response.data[0]
-
-      setNominatedMovies(nominations)
+      try {
+        const response = await serverAPI.get(`/users/${activeUser}`);
+        const { nominations, user_id, username } = response.data[0]
+  
+        setNominatedMovies(nominations)
+      }
+      catch{
+        setIsUserExist(false)
+        alert('user does not exist')
+        history.push('/')
+      }
     };
 
 
@@ -34,6 +41,7 @@ const PublicProfile = ({ match }) => {
       <Card publicNomination className="nomination-container">
 
       <NominationList 
+        isUserExist={isUserExist}
         nominatedMovies={nominatedMovies} 
         setNominatedMovies={setNominatedMovies} 
         share={true}

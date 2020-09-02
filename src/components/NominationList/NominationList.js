@@ -31,6 +31,7 @@ const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn, share
     }
   }
 
+    console.log(nominatedMovies)
 
   const renderMovies = () => {
     if (nominatedMovies?.length !== 0) {
