@@ -1,0 +1,31 @@
+.root {
+  min-width: 275;
+  border: 3px solid black;
+  border-radius:"5px";
+  box-shadow: "10px 5px 5px red";
+  padding: 0;
+  height: 80vh;
+  overflow:scroll;
+}
+
+.small{
+  border: "5px solid black";
+  border-radius:"5px";
+  box-shadow: "10px 5px 5px grey";
+  margin-bottom:"5px";
+  margin-top:"8px";
+  padding:"0px";
+}
+
+.nomination{
+  border: "3px solid black";
+  border-radius:"5px";
+  box-shadow: "10px 5px 5px red";
+  padding: 0;
+  height: 80vh;
+  overflow:"scroll"
+}
+
+.noPadding{
+  padding:"0px !important";
+}
