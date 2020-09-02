@@ -55,7 +55,17 @@ const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn, share
               </Col>
               <Col className="nomination-details-container">
               <Row className="nomination-buttons-container">
-                 {share ? null:   
+                 {share ?  
+                    
+                  <a href={`https://www.imdb.com/title/${movie.imdbID}`} target="_blank">
+                  <button
+                    className="movie-button"
+                    style={{ marginLeft: "2em" }}
+                  >
+                    Details
+                  </button>
+                  </a>
+                 :   
                   <button
                     className="nomination-button"
                     style={{ marginLeft: "2em" }}

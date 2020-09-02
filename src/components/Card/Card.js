@@ -38,6 +38,16 @@ const useStyles = makeStyles((theme)=> {
         height: "80vh"                   // secondary
       }
     },
+    publicNomination:{
+      border: "3px solid black",
+      borderRadius:"5px",
+      boxShadow: "10px 5px 5px red",
+      padding: 0,
+      height:"80vh",
+      width:"50vw",
+      overflow:"scroll",
+      
+    },
     noPadding:{
       padding:"0px !important",
     }
@@ -47,7 +57,7 @@ const useStyles = makeStyles((theme)=> {
 
 export default function SimpleCard(props) {
   const classes = useStyles();
-  const style = props.small ? classes.small : props.nomination ? classes.nomination : classes.root
+  const style = props.small ? classes.small : props.nomination ? classes.nomination : props.publicNomination ? classes.publicNomination : classes.root;
   const padding = props.noPadding ? classes.noPadding : ""
 
   return (
