@@ -13,15 +13,13 @@ const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn, share
   let isUserLogged = isLoggedIn?.username !== "" && isLoggedIn?.username !== null ? true : false
   const userId = localStorage.getItem('id');
 
+  console.log(nominatedMovies)
   const transitions = useTransition(nominatedMovies, movie => movie.imdbID, {
     from: { transform: 'translate3d(0,-40px,0)' },
     enter: { transform: 'translate3d(0,0px,0)' },
     leave: { transform: 'translate3d(0,-40px,0)' },
   })
   
-    console.log(transitions)
-    console.log(transitions[0]?.props)
-
   const handleDelete = (movieID) => {
     let copy= [...nominatedMovies]
     for (let i = 0; i<nominatedMovies.length; i++){
@@ -35,7 +33,6 @@ const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn, share
   const submitNominations = async ()=>{
     try{
       await serverApi.patch(`/users/${userId}`, {nominations: JSON.stringify(nominatedMovies)})
-      console.log('success')
     }
     catch{
       console.log('error')
@@ -43,13 +40,11 @@ const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn, share
   }
 
   const renderMovies = () => {
-    console.log(nominatedMovies)
     if (nominatedMovies?.length !== 0) {
       // return nominatedMovies.map((movie) => {
 
 
         return transitions.map(({ item, props, key }) => {
-          console.log(item)
           return(
 
              <animated.div key={key} style={props} >
