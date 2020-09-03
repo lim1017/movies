@@ -19,7 +19,7 @@ require("dotenv").config();
 const apiKey = process.env.REACT_APP_OMDB;
 
 function App() {
-  const [movieSearchTerm, setMovieSearchTerm] = useState("dragon");
+  const [movieSearchTerm, setMovieSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [nominatedMovies, setNominatedMovies] = useState([]);
   const [ isLoggedIn, setIsLoggedIn ] = useState({username:"", user_id: "", nominations:[]})

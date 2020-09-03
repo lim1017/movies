@@ -3,6 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import Modal from "../Modal/Modal";
 import MovieListCard from "./MovieListCard";
 import {useSpring, useTransition, animated} from 'react-spring'
+import logo from '../../assets/shoppiesLogo.png'
 
 import "./_MovieList.scss";
 
@@ -54,13 +55,21 @@ const MovieList = ({ data, nominatedMovies, setNominatedMovies }) => {
     }
   };
 
+
+  const renderLogo =()=>{
+    return (
+
+      <img style={{display:"flex", margin:"auto", borderRadius:"10px"}} src={logo} alt="Girl in a jacket" width="90%" height="90%" />
+    )
+  }
+
   return (
     <div>
       <Modal showModal={showModal} setShowModal={setShowModal} />
 
       <Container>
         <p className="movie-page-title">Search results</p>
-        {renderMovies()}
+        {searchResults.length === 0 ? renderLogo() : renderMovies()}
       </Container>
     </div>
   );
