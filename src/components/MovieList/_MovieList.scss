@@ -60,6 +60,13 @@
 
 }
 
+.movie-list-error-msg{
+  font-size: 18px;
+  color: red;
+  font-weight: 900;
+  margin-top:1em;
+}
+
 /* On screens that are 600px or less, set the background color to olive */
 @media screen and (max-width: 1000px) {
   .movie-button{

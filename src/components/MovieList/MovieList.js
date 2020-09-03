@@ -18,8 +18,9 @@ const MovieList = ({ data, nominatedMovies, setNominatedMovies }) => {
 
 
   const renderMovies = () => {
-    if (data.length !== 0) {
-      return data.map((movie) => {
+
+    if (data.Response === "True") {
+      return data.Search.map((movie) => {
         let checkIfNominated = nominatedMovies.filter((nominatedMovie) => {
           return movie.imdbID === nominatedMovie.imdbID;
         });
@@ -72,6 +73,10 @@ const MovieList = ({ data, nominatedMovies, setNominatedMovies }) => {
           </Card>
         );
       });
+    } else{
+      return(
+        <div className="movie-list-error-msg">{data.Error}</div>
+      )
     }
   };
 

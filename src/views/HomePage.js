@@ -36,11 +36,12 @@ function App() {
       movieDBapi
         .get(`/?s=${movieSearchTerm}&apikey=${apiKey}`)
         .then((response) => {
-          setSearchResults(response.data.Search);
+          console.log(response)
+          setSearchResults(response.data);
         });
     };
 
-    if (debouncedSearch !== "") {
+    if (debouncedSearch.replace(/\s/g, '').length !== 0) {
       handleSearch();
     }
   }, [debouncedSearch]);
