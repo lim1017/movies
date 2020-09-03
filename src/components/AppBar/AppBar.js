@@ -134,10 +134,10 @@ function ButtonAppBar({isLoggedIn, setIsLoggedIn}) {
     } else {
       return (
         <div style={{display:"flex"}}>
-          <h3 style={{alignSelf:"center"}}>Hello {isLoggedIn?.username}</h3>
+          <p className="hello-user-msg" style={{alignSelf:"center"}}>Hello {isLoggedIn?.username}</p>
           <button 
           className="app-bar-button" 
-          // style={{ marginLeft: "2em" }}
+          style={{ marginLeft: "0.5em" }}
           onClick={logout}
           >
               Logout

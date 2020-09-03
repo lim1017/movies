@@ -1,8 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import {useSpring, useTransition, animated} from 'react-spring'
+
+
 import Card from "../Card/Card";
 import serverApi from "../../apis/serverApi"
-
+import NominationListCard from "./NominationListCard"
 import "./_NominationList.scss";
 
 const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn, share, activeUser }) => {
@@ -10,6 +13,14 @@ const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn, share
   let isUserLogged = isLoggedIn?.username !== "" && isLoggedIn?.username !== null ? true : false
   const userId = localStorage.getItem('id');
 
+  const transitions = useTransition(nominatedMovies, movie => movie.imdbID, {
+    from: { transform: 'translate3d(0,-40px,0)' },
+    enter: { transform: 'translate3d(0,0px,0)' },
+    leave: { transform: 'translate3d(0,-40px,0)' },
+  })
+  
+    console.log(transitions)
+    console.log(transitions[0]?.props)
 
   const handleDelete = (movieID) => {
     let copy= [...nominatedMovies]
@@ -31,56 +42,29 @@ const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn, share
     }
   }
 
-    console.log(nominatedMovies)
-
   const renderMovies = () => {
+    console.log(nominatedMovies)
     if (nominatedMovies?.length !== 0) {
-      return nominatedMovies.map((movie) => {
-       
+      // return nominatedMovies.map((movie) => {
 
-        return (
-          <Card small noPadding key={movie.imdbID}>
-            <Row className="individual-nomination-card">
-              <Col xs={4} className="nomination-details-container">
-                <img
-                  className="nomination-poster"
-                  src={movie.Poster}
-                  alt="sad face"
-                  width="70%"
-                  height="80%"
-                />
-              </Col>
-              <Col className="nomination-details-container" >
-                <Row className="nomination-title">{movie.Title}</Row>
-                <Row className="nomination-details">{movie.Year}</Row>
-              </Col>
-              <Col className="nomination-details-container">
-              <Row className="nomination-buttons-container">
-                 {share ?  
-                    
-                  <a href={`https://www.imdb.com/title/${movie.imdbID}`} target="_blank">
-                  <button
-                    className="movie-button"
-                    style={{ marginLeft: "0.7em" }}
-                  >
-                    Details
-                  </button>
-                  </a>
-                 :   
-                  <button
-                    className="nomination-button"
-                    style={{ marginLeft: "0.7em" }}
-                    onClick={()=>handleDelete(movie.imdbID)}
-                  >
-                    Delete
-                  </button>
-                 }
-                </Row>
-              </Col>
-            </Row>
-          </Card>
-        );
-      });
+
+        return transitions.map(({ item, props, key }) => {
+          console.log(item)
+          return(
+
+             <animated.div key={key} style={props} >
+               <NominationListCard item={item} share={share} handleDelete={handleDelete}/>
+              </animated.div>
+          
+
+
+          )
+        }
+
+        )
+
+
+      
     } else {
       return (
         <div className="nomination-instructions">
@@ -92,7 +76,7 @@ const NominationList = ({ nominatedMovies, setNominatedMovies, isLoggedIn, share
 
   return <Container>
     <div style={{display:"flex", justifyContent:"space-between"}}>
-    <p className="nomination-page-title"> {share ? activeUser +"'s" : null} Nomination List</p>
+    <p className="nomination-page-title"> {share ? activeUser +"'s" : null} Nominations</p>
     {
     nominatedMovies?.length === 5 && isUserLogged && !share ? 
     <button className="nomination-button" onClick={submitNominations}>Save/Submit</button> 

@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme)=> {
 
   return {
     root: {
-      minWidth: 275,
+      // minWidth: 275,
       border: "3px solid black",
       borderRadius:"5px",
       boxShadow: "10px 5px 5px red",
@@ -25,7 +25,8 @@ const useStyles = makeStyles((theme)=> {
       boxShadow: "10px 5px 5px grey",
       marginBottom:"5px",
       marginTop:"8px",
-      padding:"0px"
+      padding:"0px",
+      // minHeight: "125px"
     },
     nomination:{
       border: "3px solid black",
