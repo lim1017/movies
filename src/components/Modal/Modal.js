@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import Card from "../Card/Card";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -43,7 +42,7 @@ export default function TransitionsModal({ showModal, setShowModal }) {
       >
         <Fade in={showModal.state}>
           <div className={classes.paper}>
-            <img src={showModal.img} width="100%" height="100%" />
+            <img src={showModal.img} width="100%" height="100%" alt="film" />
           </div>
         </Fade>
       </Modal>

@@ -57,6 +57,9 @@ const useStyles = makeStyles((theme)=> {
     },
     noPadding:{
       padding:"0px !important",
+    }, 
+    maxWidth:{
+      width: "100%"
     }
   }
 
@@ -65,7 +68,7 @@ const useStyles = makeStyles((theme)=> {
 export default function SimpleCard(props) {
   const classes = useStyles();
   const style = props.small ? classes.small : props.nomination ? classes.nomination : props.publicNomination ? classes.publicNomination : classes.root;
-  const padding = props.noPadding ? classes.noPadding : ""
+  const padding = props.noPadding ? classes.noPadding : props.publicNomination ? classes.maxWidth : ""
 
   return (
     <Card className={style}>

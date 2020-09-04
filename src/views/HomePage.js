@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/App.scss"
 import SearchBar from "../components/SearchBar/SearchBar";
-import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import useDebounce from "../hooks/useDebounce";
 import MovieList from "../components/MovieList/MovieList";
@@ -10,11 +10,11 @@ import AppBar from "../components/AppBar/AppBar"
 import movieDBapi from "../apis/movieDBapi"
 import Card from "../components/Card/Card";
 
-require("dotenv").config();
+// require("dotenv").config();
  
 //todo
-// loading Spinner
 // total votes for each movie
+// mutiple pages for search results
 
 const apiKey = process.env.REACT_APP_OMDB;
 
