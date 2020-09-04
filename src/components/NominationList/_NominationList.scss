@@ -41,7 +41,7 @@
 .nomination-button{
   color: $btn-text;
   background-color: $btn-color;
-  padding: 5px;
+  padding: 12px;
   border-radius: 5px;
 }
 
@@ -55,7 +55,7 @@
   transform: scale(1);
   cursor: not-allowed;
   background-color: $btn-disabled-color;
-  padding: 8px;
+  padding: 12px;
   border-radius: 5px;
   text-decoration: line-through;
 
@@ -84,13 +84,33 @@
   background-color: $btn-disabled-color;
   padding: 8px;
   border-radius: 5px;
-
+  margin-left: 1em;
 }
 
 .nomination-page-title{
   font-size: 30px;
   font-weight: 800;
   margin-bottom: 0px;
+}
+
+.nomination-header-container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.results-promp-container{
+  display: flex;
+}
+
+
+@media screen and (max-width: 1000px) {
+  .nomination-button{
+    padding: $btn-padding-movie-med;
+  }
+  
+  .nomination-button:disabled{
+    padding: $btn-padding-movie-med;
+  }
 }
 
 @media screen and (max-width: 750px) {
@@ -105,6 +125,23 @@
 
 .nomination-page-title{
   font-size: 22px;  
+}
+
+.nomination-header-container{
+  flex-direction: column;
+}
+
+
+.nomination-button{
+  padding: $btn-padding-movie-small;
+}
+
+.nomination-button:disabled{
+  padding: $btn-padding-movie-small;
+}
+
+.results-promp-container{
+  justify-content: space-between;
 }
 
 

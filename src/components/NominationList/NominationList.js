@@ -67,9 +67,46 @@ const NominationList = ({
     }
   };
 
+
+
+  const compileResults = async() =>{
+
+    let finalOP={}
+
+      const results = await serverApi.get("/users")
+      const userVotes =results.data
+      userVotes.forEach(user =>{
+        const { nominations } = user
+
+        console.log(nominations)
+
+        if(Object.keys(nominations).length !== 0){
+
+        
+        nominations.forEach(nomination =>{
+          console.log(nomination)
+          if (!finalOP[nomination.Title]){
+            finalOP[nomination.Title] = 1
+          } else {
+            finalOP[nomination.Title] += 1 
+          }
+        })
+        }
+     
+
+      })
+
+      console.log(finalOP)
+
+
+   
+
+  }
+
+  
   return (
     <Container>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div className="nomination-header-container">
         <p className="nomination-page-title">
           {" "}
           {share ? activeUser + "'s" : null} Nominations
@@ -79,12 +116,19 @@ const NominationList = ({
             Save/Submit
           </button>
         ) : null}
+        <div className="results-promp-container">
+          <button 
+            onClick={compileResults}
+            className="nomination-button">
+            Results
+          </button>
 
         {nominatedMovies?.length === 5 && !isUserLogged && !share ? (
           <button className="login-register-prompt-button" disabled>
             Login/Register to Vote
           </button>
         ) : null}
+        </div>
       </div>
       {isLoading ? (
         <div
