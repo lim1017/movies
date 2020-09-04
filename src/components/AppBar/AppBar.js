@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Swal from 'sweetalert2'
 import serverApi from "../../apis/serverApi"
 import './_AppBar.scss'
+import Loading from "../Loading/Loading"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 function ButtonAppBar({isLoggedIn, setIsLoggedIn}) {
   const classes = useStyles();
   const [ userTextField, setUserTextField ] = useState("")
+  const [ isLoading, setIsLoading ] = useState(false)
   
 
   let isDisabled = userTextField === "" ? true : false;
@@ -36,9 +38,11 @@ function ButtonAppBar({isLoggedIn, setIsLoggedIn}) {
     const userName = localStorage.getItem('username');
 
     const fetchUser = async ()=>{
+     setIsLoading(true) 
      const response= await serverApi.get(`/users/${userName}`)
-
      setIsLoggedIn(response.data[0])
+     setIsLoading(false) 
+
     }
 
     if(userName!==null){
@@ -50,17 +54,17 @@ function ButtonAppBar({isLoggedIn, setIsLoggedIn}) {
   }, [])
 
   function login() {
+    setIsLoading(true) 
     Promise.all([serverApi.get(`/users/${userTextField}`)])
       .then(response => {
     
           const userz = response[0].data[0];
           localStorage.setItem("username", userz.username);
           localStorage.setItem("id", userz.user_id);
-          // setIsLoggedIn({ name: userz.username, id: userz.user_id, nominations:userz.nominations });
-          console.log(userz)
           setIsLoggedIn(userz)
+          setIsLoading(false) 
 
-          Swal.fire(
+          Swal.fire(  
             `Welcome ${userz.username}`,
             '',
             'success'
@@ -69,6 +73,7 @@ function ButtonAppBar({isLoggedIn, setIsLoggedIn}) {
       })
       .catch(error => {
         console.log(error);
+        setIsLoading(false) 
         Swal.fire(
           'Error user does not exist!',
           'Please Register',
@@ -84,11 +89,13 @@ function ButtonAppBar({isLoggedIn, setIsLoggedIn}) {
 
   const register = async()=>{
     try{
+      setIsLoading(true) 
       await serverApi.put('/users/register', {username: userTextField})
       login()
       
     }
     catch{
+      setIsLoading(false) 
       Swal.fire(
         'Error user already exist!',
         'Please Login or try another name',
@@ -112,22 +119,27 @@ function ButtonAppBar({isLoggedIn, setIsLoggedIn}) {
             className:"appbar-textfield"
           }}
           />
-          <button 
-          className="app-bar-button" 
-          style={{ marginLeft: "0.5em" }}
-          onClick={()=>login()}
-          disabled={isDisabled}
-          >
-            Login
-          </button>
-          <button 
-          className="app-bar-button" 
-          style={{ marginLeft: "0.5em" }}
-          onClick={register}
-          disabled={isDisabled}
-          >
-            Register
-          </button>
+          {isLoading ? <div style={{marginLeft:"1em"}}><Loading size={40} color="primary" /> </div> :
+            <>
+            <button 
+            className="app-bar-button" 
+            style={{ marginLeft: "0.5em" }}
+            onClick={()=>login()}
+            disabled={isDisabled}
+            >
+              Login
+            </button>
+            <button 
+            className="app-bar-button" 
+            style={{ marginLeft: "0.5em" }}
+            onClick={register}
+            disabled={isDisabled}
+            >
+              Register
+            </button>
+            </>
+          }
+          
           
         </div>
       )

@@ -5,19 +5,19 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    justifyContent:"center",
     '& > * + *': {
       marginLeft: theme.spacing(2),
     },
   },
 }));
 
-export default function CircularIndeterminate() {
+export default function CircularIndeterminate({size, color}) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <CircularProgress />
-      <CircularProgress color="secondary" />
+      <CircularProgress color={color} size={size} thickness={8.5} />
     </div>
   );
 }

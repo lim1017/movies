@@ -4,10 +4,11 @@ import Modal from "../Modal/Modal";
 import MovieListCard from "./MovieListCard";
 import {useSpring, useTransition, animated} from 'react-spring'
 import logo from '../../assets/shoppiesLogo.png'
+import Loading from '../Loading/Loading'
 
 import "./_MovieList.scss";
 
-const MovieList = ({ data, nominatedMovies, setNominatedMovies }) => {
+const MovieList = ({ data, nominatedMovies, setNominatedMovies, isLoading }) => {
   const [showModal, setShowModal] = useState({ state: false, img: "" });
 
 
@@ -69,7 +70,12 @@ const MovieList = ({ data, nominatedMovies, setNominatedMovies }) => {
 
       <Container>
         <p className="movie-page-title">Search results</p>
-        {searchResults.length === 0 ? renderLogo() : renderMovies()}
+        { isLoading ? 
+          <div style={{marginTop:"5em"}}>
+            <Loading size={80} color="secondary" />
+          </div>
+           : 
+          searchResults.length === 0 ? renderLogo() : renderMovies()}
       </Container>
     </div>
   );

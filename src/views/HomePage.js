@@ -11,7 +11,7 @@ import movieDBapi from "../apis/movieDBapi"
 import Card from "../components/Card/Card";
 
 require("dotenv").config();
-
+ 
 //todo
 // loading Spinner
 // total votes for each movie
@@ -23,6 +23,7 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [nominatedMovies, setNominatedMovies] = useState([]);
   const [ isLoggedIn, setIsLoggedIn ] = useState({username:"", user_id: "", nominations:[]})
+  const [ isLoading, setIsLoading] = useState(false)
 
   const debouncedSearch = useDebounce(movieSearchTerm, 500);
 
@@ -36,11 +37,12 @@ function App() {
 
   useEffect(() => {
     const handleSearch = () => {
+      setIsLoading(true)
       movieDBapi
         .get(`/?s=${movieSearchTerm}&apikey=${apiKey}`)
         .then((response) => {
-          console.log(response)
           setSearchResults(response.data);
+          setIsLoading(false)
         });
     };
 
@@ -64,7 +66,7 @@ function App() {
         <Row>
           <Col xs={12} md={7}>
             <Card>
-              <MovieList data={searchResults} nominatedMovies={nominatedMovies} setNominatedMovies={setNominatedMovies} />
+              <MovieList data={searchResults} nominatedMovies={nominatedMovies} setNominatedMovies={setNominatedMovies} isLoading={isLoading} />
             </Card>
           </Col>
 
