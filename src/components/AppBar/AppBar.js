@@ -63,6 +63,7 @@ function ButtonAppBar({ isLoggedIn, setIsLoggedIn }) {
 
   function logout() {
     localStorage.clear();
+    setUserTextField("")
     setIsLoggedIn({ username: "", user_id: "", nominations: [] });
   }
 

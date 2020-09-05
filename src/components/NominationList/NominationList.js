@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import { useTransition, animated } from "react-spring";
 
 import serverApi from "../../apis/serverApi";
 import NominationListCard from "./NominationListCard";
 import Loading from "../Loading/Loading";
+import ResultsModal from "../Modal/ResultsModal"
+
 import "./_NominationList.scss";
 
 const NominationList = ({
@@ -15,6 +17,9 @@ const NominationList = ({
   activeUser,
   isLoading,
 }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [voteTotal, setVoteTotal] = useState({});
+
   let isUserLogged =
     isLoggedIn?.username !== "" && isLoggedIn?.username !== null ? true : false;
   const userId = localStorage.getItem("id");
@@ -67,67 +72,53 @@ const NominationList = ({
     }
   };
 
+  const compileResults = async () => {
+    let finalOP = {};
 
+    const results = await serverApi.get("/users");
+    const userVotes = results.data;
+    userVotes.forEach((user) => {
+      const { nominations } = user;
 
-  const compileResults = async() =>{
-
-    let finalOP={}
-
-      const results = await serverApi.get("/users")
-      const userVotes =results.data
-      userVotes.forEach(user =>{
-        const { nominations } = user
-
-        console.log(nominations)
-
-        if(Object.keys(nominations).length !== 0){
-
-        
-        nominations.forEach(nomination =>{
-          console.log(nomination)
-          if (!finalOP[nomination.Title]){
-            finalOP[nomination.Title] = 1
+      if (Object.keys(nominations).length !== 0) {
+        nominations.forEach((nomination) => {
+          if (!finalOP[nomination.Title]) {
+            finalOP[nomination.Title] = 1;
           } else {
-            finalOP[nomination.Title] += 1 
+            finalOP[nomination.Title] += 1;
           }
-        })
-        }
-     
+        });
+      }
+    });
 
-      })
+    setVoteTotal(finalOP);
+    setShowModal(true);
+  };
 
-      console.log(finalOP)
-
-
-   
-
-  }
-
-  
   return (
     <Container>
+      <ResultsModal showModal={showModal} setShowModal={setShowModal} voteTotal={voteTotal} />
       <div className="nomination-header-container">
         <p className="nomination-page-title">
           {" "}
           {share ? activeUser + "'s" : null} Nominations
         </p>
+        <div className="results-promp-container"> 
+
         {nominatedMovies?.length === 5 && isUserLogged && !share ? (
-          <button className="nomination-button" onClick={submitNominations}>
+          <button className="nomination-button" style={{marginRight:"1em"}} onClick={submitNominations}>
             Save/Submit
           </button>
         ) : null}
-        <div className="results-promp-container">
-          <button 
-            onClick={compileResults}
-            className="nomination-button">
+          <button onClick={compileResults} className="nomination-button">
             Results
           </button>
 
-        {nominatedMovies?.length === 5 && !isUserLogged && !share ? (
-          <button className="login-register-prompt-button" disabled>
-            Login/Register to Vote
-          </button>
-        ) : null}
+          {nominatedMovies?.length === 5 && !isUserLogged && !share ? (
+            <button className="login-register-prompt-button" disabled>
+              Login/Register to Vote
+            </button>
+          ) : null}
         </div>
       </div>
       {isLoading ? (
