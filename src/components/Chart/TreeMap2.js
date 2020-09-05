@@ -35,12 +35,14 @@ export default class MyComponent extends React.Component {
     return (
       <div>
         <Chart
-          width={"500px"}
-          height={"300px"}
+          width={"60vw"}
+          height={"60vh"}
           chartType="TreeMap"
           loader={<div>Loading Chart</div>}
           data={formattedData}
           options={{
+            title:"Total Nominations",
+            titleTextStyle:{color:"white", fontSize:22, bold:true},
             minColor: "#f00",
             midColor: "#ddd",
             maxColor: "#0d0",
@@ -48,8 +50,6 @@ export default class MyComponent extends React.Component {
             fontColor: "black",
             showScale: true,
             generateTooltip: (row, size, value) => {
-              console.log(row, "row-----", value, "value");
-
               return (
                 '<div style="background:#fd9; padding:10px; border-style:solid; position:relative; z-index:9999;"> ' +
                 formattedData[row + 1][0] +
@@ -60,7 +60,7 @@ export default class MyComponent extends React.Component {
               );
             },
           }}
-          rootProps={{ "data-testid": "3" }}
+          rootProps={{ "data-testid": "3"  }}
         />
       </div>
     );
