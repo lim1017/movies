@@ -18,14 +18,12 @@ const PublicProfile = (props) => {
     const fetchUser = async () => {
       setIsLoading(true);
       try {
-      
         const response = await serverAPI.get(`/users/${activeUser}`);
         const { nominations, user_id, username } = response.data[0];
-        console.log(Object.keys(nominations))
-        if(Object.keys(nominations).length === 0){
-
+        console.log(Object.keys(nominations));
+        if (Object.keys(nominations).length === 0) {
           setNominatedMovies([]);
-        } else{
+        } else {
           setNominatedMovies(nominations);
         }
 
@@ -38,7 +36,7 @@ const PublicProfile = (props) => {
     };
 
     fetchUser();
-  }, []);
+  }, [match.params.username]);
 
   return (
     <div

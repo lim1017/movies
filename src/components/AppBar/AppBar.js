@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { withRouter, Link } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -20,10 +21,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ButtonAppBar({ isLoggedIn, setIsLoggedIn }) {
+function ButtonAppBar(props) {
   const classes = useStyles();
   const [userTextField, setUserTextField] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+
+  const { isLoggedIn, setIsLoggedIn } = props
 
   let isDisabled = userTextField === "" ? true : false;
 
@@ -156,10 +160,15 @@ function ButtonAppBar({ isLoggedIn, setIsLoggedIn }) {
             }}
           >
             <div>
-              <p className="page-title">Shoppies</p>
+              <Link
+               style={{textDecoration: 'none', color:"white"}}
+               to="/" 
+              >
+                <p className="page-title">Shoppies</p>
+              </Link>
             </div>
 
-            {renderLoginLogout()}
+            { props.location.pathname === "/" ? renderLoginLogout() : null}
           </div>
         </Toolbar>
       </AppBar>
@@ -167,4 +176,4 @@ function ButtonAppBar({ isLoggedIn, setIsLoggedIn }) {
   );
 }
 
-export default ButtonAppBar;
+export default withRouter(ButtonAppBar);

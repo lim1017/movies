@@ -56,7 +56,6 @@ const NominationList = ({
   };
 
   const renderMovies = () => {
-    console.log(nominatedMovies.length)
     if (nominatedMovies.length !== 0) {
       return transitions.map(({ item, props, key }) => {
         return (
@@ -78,6 +77,10 @@ const NominationList = ({
       );
     }
   };
+
+  const shareProfile = ()=>{
+
+  }
 
   const compileResults = async () => {
     let finalOP = {};
@@ -115,10 +118,13 @@ const NominationList = ({
         <div className="results-promp-container"> 
 
         {nominatedMovies?.length === 5 && isUserLogged && !share ? (
-          <button className="nomination-button" style={{marginRight:"1em"}} onClick={submitNominations}>
+          <button className="nomination-button"  onClick={submitNominations}>
             Save/Submit
           </button>
         ) : null}
+         <button onClick={shareProfile} style={{marginLeft:"1em", marginRight:"1em"}} className="nomination-button">
+            Share
+          </button>
           <button onClick={compileResults} className="nomination-button">
             Results
           </button>

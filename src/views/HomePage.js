@@ -14,14 +14,14 @@ import Card from "../components/Card/Card";
 //todo
 // fix disallow click, but allow hovor
 
-const apiKey = process.env.REACT_APP_OMDB;
+const apiKey = process.env.REACT_APP_OMDB;  
 
-function App() {
+function App({isLoggedIn}) {
   const [movieSearchTerm, setMovieSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1)
   const [searchResults, setSearchResults] = useState([]);
   const [nominatedMovies, setNominatedMovies] = useState([]);
-  const [ isLoggedIn, setIsLoggedIn ] = useState({username:"", user_id: "", nominations:[]})
+  // const [ isLoggedIn, setIsLoggedIn ] = useState({username:"", user_id: "", nominations:[]})
   const [ isLoading, setIsLoading] = useState(false)
 
   const debouncedSearch = useDebounce(movieSearchTerm, 500);
@@ -63,7 +63,6 @@ function App() {
 
   return (
     <div className="App">
-      <AppBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <div className="searchBar-container">
         <SearchBar
           setCurrentPage={setCurrentPage}
