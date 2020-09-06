@@ -10,7 +10,6 @@ import AppBar from "../components/AppBar/AppBar"
 import movieDBapi from "../apis/movieDBapi"
 import Card from "../components/Card/Card";
 
-// require("dotenv").config();
  
 //todo
 // fix disallow click, but allow hovor
