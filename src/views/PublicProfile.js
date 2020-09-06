@@ -18,10 +18,17 @@ const PublicProfile = (props) => {
     const fetchUser = async () => {
       setIsLoading(true);
       try {
+      
         const response = await serverAPI.get(`/users/${activeUser}`);
         const { nominations, user_id, username } = response.data[0];
+        console.log(Object.keys(nominations))
+        if(Object.keys(nominations).length === 0){
 
-        setNominatedMovies(nominations);
+          setNominatedMovies([]);
+        } else{
+          setNominatedMovies(nominations);
+        }
+
         setIsLoading(false);
       } catch {
         setIsUserExist(false);

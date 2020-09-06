@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import { useTransition, animated } from "react-spring";
+import SadFace from '@material-ui/icons/SentimentVeryDissatisfied';
 
 import serverApi from "../../apis/serverApi";
 import NominationListCard from "./NominationListCard";
@@ -55,7 +56,8 @@ const NominationList = ({
   };
 
   const renderMovies = () => {
-    if (nominatedMovies?.length !== 0) {
+    console.log(nominatedMovies.length)
+    if (nominatedMovies.length !== 0) {
       return transitions.map(({ item, props, key }) => {
         return (
           <animated.div key={key} style={props}>
@@ -71,7 +73,7 @@ const NominationList = ({
     } else {
       return (
         <div className="nomination-instructions">
-          {share ? null : <div>Nominate 5 movies for the Shoppies!</div>}
+          {share ? <div>No Nominations selected <SadFace style={{fontSize: "35px"}}/> </div> : <div>Nominate 5 movies for the Shoppies!</div>}
         </div>
       );
     }
