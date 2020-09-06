@@ -12,8 +12,7 @@ function App() {
 
   return (
     <Router>
-            <AppBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-
+      <AppBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Switch>
         
         <Route exact path="/">

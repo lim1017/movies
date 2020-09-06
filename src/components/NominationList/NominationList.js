@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import { useTransition, animated } from "react-spring";
-import SadFace from '@material-ui/icons/SentimentVeryDissatisfied';
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import SadFace from "@material-ui/icons/SentimentVeryDissatisfied";
+import Swal from "sweetalert2";
 
 import serverApi from "../../apis/serverApi";
 import NominationListCard from "./NominationListCard";
 import Loading from "../Loading/Loading";
-import ResultsModal from "../Modal/ResultsModal"
+import ResultsModal from "../Modal/ResultsModal";
 import PictureModal from "../Modal/PictureModal";
-
 
 import "./_NominationList.scss";
 
@@ -20,8 +21,10 @@ const NominationList = ({
   activeUser,
   isLoading,
 }) => {
-
-  const [showPictureModal, setShowPictureModal] = useState({ state: false, img: "" });
+  const [showPictureModal, setShowPictureModal] = useState({
+    state: false,
+    img: "",
+  });
   const [showResultsModal, setShowResultsModal] = useState(false);
   const [voteTotal, setVoteTotal] = useState({});
 
@@ -72,15 +75,22 @@ const NominationList = ({
     } else {
       return (
         <div className="nomination-instructions">
-          {share ? <div>No Nominations selected <SadFace style={{fontSize: "35px"}}/> </div> : <div>Nominate 5 movies for the Shoppies!</div>}
+          {share ? (
+            <div>
+              This user has Nominations yet{" "}
+              <SadFace style={{ fontSize: "35px" }} />{" "}
+            </div>
+          ) : (
+            <div>Nominate 5 movies for the Shoppies!</div>
+          )}
         </div>
       );
     }
   };
 
-  const shareProfile = ()=>{
-
-  }
+  const shareProfile = () => {
+    Swal.fire(`Copied shareable link to clipboard`, "", "success");
+  };
 
   const compileResults = async () => {
     let finalOP = {};
@@ -107,24 +117,42 @@ const NominationList = ({
 
   return (
     <Container>
-      <ResultsModal showModal={showResultsModal} setShowModal={setShowResultsModal} voteTotal={voteTotal} />
-      <PictureModal showModal={showPictureModal} setShowModal={setShowPictureModal} />
+      <ResultsModal
+        showModal={showResultsModal}
+        setShowModal={setShowResultsModal}
+        voteTotal={voteTotal}
+      />
+      <PictureModal
+        showModal={showPictureModal}
+        setShowModal={setShowPictureModal}
+      />
 
-      <div className="nomination-header-container"> 
+      <div className="nomination-header-container">
         <p className="nomination-page-title">
           {" "}
           {share ? activeUser + "'s" : null} Nominations
         </p>
-        <div className="results-promp-container"> 
+        <div className="results-promp-container">
+          {nominatedMovies?.length === 5 && isUserLogged && !share ? (
+            <button className="nomination-button" onClick={submitNominations}>
+              Save/Submit
+            </button>
+          ) : null}
 
-        {nominatedMovies?.length === 5 && isUserLogged && !share ? (
-          <button className="nomination-button"  onClick={submitNominations}>
-            Save/Submit
-          </button>
-        ) : null}
-         <button onClick={shareProfile} style={{marginLeft:"1em", marginRight:"1em"}} className="nomination-button">
-            Share
-          </button>
+          {isUserLogged ? (
+            <CopyToClipboard
+              copy={shareProfile}
+              text={`http://localhost:3000/#/profile/${isLoggedIn?.username}`}
+            >
+              <button
+                onClick={shareProfile}
+                style={{ marginLeft: "1em", marginRight: "1em" }}
+                className="nomination-button"
+              >
+                Share
+              </button>
+            </CopyToClipboard>
+          ) : null}
           <button onClick={compileResults} className="nomination-button">
             Results
           </button>

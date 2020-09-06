@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme)=> {
       // minWidth: 275,
       border: "3px solid black",
       borderRadius:"5px",
-      boxShadow: "10px 5px 5px red",
+      boxShadow: "10px 5px 5px #800000",
       padding: 0,
       height: "60vh",
       overflow:"scroll",
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme)=> {
     nomination:{
       border: "3px solid black",
       borderRadius:"5px",
-      boxShadow: "10px 5px 5px red",
+      boxShadow: "10px 5px 5px #800000",
       padding: 0,
       height:"60vh",
       overflow:"scroll",

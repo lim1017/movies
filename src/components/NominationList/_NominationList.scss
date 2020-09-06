@@ -102,6 +102,11 @@
   display: flex;
 }
 
+@media screen and (max-width: 1400px) {
+  .nomination-header-container{
+    flex-direction: column;
+  }
+}
 
 @media screen and (max-width: 1000px) {
   .nomination-button{

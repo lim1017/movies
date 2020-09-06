@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { withRouter, Link } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -26,6 +26,7 @@ function ButtonAppBar(props) {
   const [userTextField, setUserTextField] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const header = useRef()
 
   const { isLoggedIn, setIsLoggedIn } = props
 
@@ -149,8 +150,8 @@ function ButtonAppBar(props) {
   };
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static" color="secondary">
+    <div className={classes.root}  style={{marginBottom: header?.current?.clientHeight}}>
+      <AppBar ref={header} position="fixed" color="secondary">
         <Toolbar>
           <div
             style={{
