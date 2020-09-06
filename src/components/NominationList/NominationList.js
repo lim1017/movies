@@ -19,6 +19,7 @@ const NominationList = ({
   activeUser,
   isLoading,
 }) => {
+
   const [showPictureModal, setShowPictureModal] = useState({ state: false, img: "" });
   const [showResultsModal, setShowResultsModal] = useState(false);
   const [voteTotal, setVoteTotal] = useState({});
@@ -98,8 +99,6 @@ const NominationList = ({
     setVoteTotal(finalOP);
     setShowResultsModal(true);
   };
-
-  console.log(showPictureModal)
 
   return (
     <Container>

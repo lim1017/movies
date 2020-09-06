@@ -39,7 +39,7 @@ function App() {
     const handleSearch = () => {
       setIsLoading(true)
       movieDBapi
-        .get(`/?s=${movieSearchTerm}&apikey=${apiKey}&page=${currentPage}`)
+        .get(`/?s=${movieSearchTerm}&apikey=${apiKey}&page=${currentPage}&type=movie`)
         .then((response) => {
           console.log(response)
           setSearchResults(response.data);
