@@ -38,7 +38,10 @@ function App({isLoggedIn}) {
           console.log(response)
           setSearchResults(response.data);
           setIsLoading(false)
-        });
+        })
+        .catch((err) =>{
+          console.log(err)
+        })
     };
 
     if (debouncedSearch.replace(/\s/g, '').length !== 0) {

@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: 'http://www.omdbapi.com'
+  baseURL: 'https://cors-anywhere.herokuapp.com/http://www.omdbapi.com'
 })
