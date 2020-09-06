@@ -55,7 +55,6 @@ function ButtonAppBar({ isLoggedIn, setIsLoggedIn }) {
         Swal.fire(`Welcome ${userz.username}`, "", "success");
       })
       .catch((error) => {
-        console.log(error);
         setIsLoading(false);
         Swal.fire("Error user does not exist!", "Please Register", "error");
       });

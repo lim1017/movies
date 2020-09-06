@@ -6,6 +6,8 @@ import serverApi from "../../apis/serverApi";
 import NominationListCard from "./NominationListCard";
 import Loading from "../Loading/Loading";
 import ResultsModal from "../Modal/ResultsModal"
+import PictureModal from "../Modal/PictureModal";
+
 
 import "./_NominationList.scss";
 
@@ -17,7 +19,8 @@ const NominationList = ({
   activeUser,
   isLoading,
 }) => {
-  const [showModal, setShowModal] = useState(false);
+  const [showPictureModal, setShowPictureModal] = useState({ state: false, img: "" });
+  const [showResultsModal, setShowResultsModal] = useState(false);
   const [voteTotal, setVoteTotal] = useState({});
 
   let isUserLogged =
@@ -59,6 +62,7 @@ const NominationList = ({
               item={item}
               share={share}
               handleDelete={handleDelete}
+              setShowPictureModal={setShowPictureModal}
             />
           </animated.div>
         );
@@ -92,13 +96,17 @@ const NominationList = ({
     });
 
     setVoteTotal(finalOP);
-    setShowModal(true);
+    setShowResultsModal(true);
   };
+
+  console.log(showPictureModal)
 
   return (
     <Container>
-      <ResultsModal showModal={showModal} setShowModal={setShowModal} voteTotal={voteTotal} />
-      <div className="nomination-header-container">
+      <ResultsModal showModal={showResultsModal} setShowModal={setShowResultsModal} voteTotal={voteTotal} />
+      <PictureModal showModal={showPictureModal} setShowModal={setShowPictureModal} />
+
+      <div className="nomination-header-container"> 
         <p className="nomination-page-title">
           {" "}
           {share ? activeUser + "'s" : null} Nominations

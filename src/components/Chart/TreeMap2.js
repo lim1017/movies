@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useRef} from "react";
 
 import Chart from "react-google-charts";
 
-export default class MyComponent extends React.Component {
-  render() {
+const Tree = (props)=> {
+  
+
+    const chart = useRef()
+
     const randomNumber = () => {
       return Math.floor(Math.random() * 100);
     };
@@ -19,34 +22,36 @@ export default class MyComponent extends React.Component {
         ["Nominations", null, 0, 0],
       ];
 
-      console.log(data);
 
       data.forEach((element) => {
-        finalOP.push([element[0], "Nominations", element[1], randomNumber()]);
+        finalOP.push([`${element[0]} : ${element[1]} Votes`, "Nominations", element[1], randomNumber()]);
       });
 
-      console.log(finalOP);
       return finalOP;
     };
 
-    const data = Object.entries(this.props.data);
+    const data = Object.entries(props.data);
     const formattedData = convertData(data);
+    
 
     return (
       <div>
         <Chart
+          ref={chart}
           width={"60vw"}
           height={"60vh"}
           chartType="TreeMap"
           loader={<div>Loading Chart</div>}
           data={formattedData}
           options={{
+            maxDepth: 0,
+            maxPostDepth: 0,
             title:"Total Nominations",
             titleTextStyle:{color:"white", fontSize:22, bold:true},
             minColor: "#f00",
             midColor: "#ddd",
             maxColor: "#0d0",
-            headerHeight: 15,
+            headerHeight: 25,
             fontColor: "black",
             showScale: true,
             generateTooltip: (row, size, value) => {
@@ -64,5 +69,7 @@ export default class MyComponent extends React.Component {
         />
       </div>
     );
-  }
+  
 }
+
+export default Tree

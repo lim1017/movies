@@ -19,7 +19,6 @@ export default class Example extends PureComponent {
   // static jsfiddleUrl = 'https://jsfiddle.net/alidingling/u702a3Lx/';
 
   render() {
-    console.log(this.props.data)
 
     return (
       <Treemap

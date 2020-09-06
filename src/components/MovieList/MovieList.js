@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import { useTransition, animated } from "react-spring";
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Swal from "sweetalert2";
 
 import logo from "../../assets/shoppiesLogo.png";
 import Loading from "../Loading/Loading";
-import Modal from "../Modal/Modal";
+import PictureModal from "../Modal/PictureModal";
 import MovieListCard from "./MovieListCard";
+import ProgressBar from "../ProgressBar/ProgressBar"
 import "./_MovieList.scss";
 
 const MovieList = ({
@@ -14,11 +17,12 @@ const MovieList = ({
   nominatedMovies,
   setNominatedMovies,
   isLoading,
+  changePage,
+  currentPage
 }) => {
   const [showModal, setShowModal] = useState({ state: false, img: "" });
 
   let searchResults = data.Search ? data.Search : [];
-  console.log(searchResults);
 
   const transitions = useTransition(searchResults, (result) => result.imdbID, {
     from: { transform: "translate3d(0,-40px,0)" },
@@ -55,7 +59,19 @@ const MovieList = ({
     });
   };
 
-  const renderLogo = () => {
+  const renderSearchDetails = () => {
+    return (
+      <div className="arrow-icons-container">
+        {data.totalResults} Results 
+        <div>
+        <ArrowBackIcon className="arrow-icons" onClick={()=>changePage("back")} />
+        <ArrowForwardIcon className="arrow-icons" onClick={()=>changePage("forward")} />
+        </div>
+      </div>
+    )
+  }
+
+  const renderLogo = () => { 
     return (
       <img
         style={{ display: "flex", margin: "auto", borderRadius: "10px" }}
@@ -69,12 +85,17 @@ const MovieList = ({
 
   return (
     <div>
-      <Modal showModal={showModal} setShowModal={setShowModal} />
+      <PictureModal showModal={showModal} setShowModal={setShowModal} />
 
       <Container>
         <div className="movie-page-title">
           Search results{" "}
-          {data.Response === "False" ? (
+          { data.totalResults > 0 ? renderSearchDetails() : null}
+        </div>
+        <div>
+        { data.totalResults > 0 ? <ProgressBar currentPage={currentPage} totalPages={data.totalResults/10} /> : null}
+
+        {data.Response === "False" ? (
             <div className="movie-list-error-msg">{data.Error}</div>
           ) : null}{" "}
         </div>

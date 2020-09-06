@@ -13,13 +13,13 @@ import Card from "../components/Card/Card";
 // require("dotenv").config();
  
 //todo
-// total votes for each movie
-// mutiple pages for search results
+// fix disallow click, but allow hovor
 
 const apiKey = process.env.REACT_APP_OMDB;
 
 function App() {
   const [movieSearchTerm, setMovieSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1)
   const [searchResults, setSearchResults] = useState([]);
   const [nominatedMovies, setNominatedMovies] = useState([]);
   const [ isLoggedIn, setIsLoggedIn ] = useState({username:"", user_id: "", nominations:[]})
@@ -39,8 +39,9 @@ function App() {
     const handleSearch = () => {
       setIsLoading(true)
       movieDBapi
-        .get(`/?s=${movieSearchTerm}&apikey=${apiKey}`)
+        .get(`/?s=${movieSearchTerm}&apikey=${apiKey}&page=${currentPage}`)
         .then((response) => {
+          console.log(response)
           setSearchResults(response.data);
           setIsLoading(false)
         });
@@ -49,7 +50,16 @@ function App() {
     if (debouncedSearch.replace(/\s/g, '').length !== 0) {
       handleSearch();
     }
-  }, [debouncedSearch]);
+  }, [debouncedSearch, currentPage]);
+
+  const changePage = (direction) => {
+    if (direction === "forward" && currentPage < (searchResults.totalResults/10) ){
+      setCurrentPage(currentPage + 1)
+    } 
+    if (direction ==="back" && currentPage !== 1){
+      setCurrentPage(currentPage - 1)
+    } 
+  }
 
 
   return (
@@ -57,6 +67,7 @@ function App() {
       <AppBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <div className="searchBar-container">
         <SearchBar
+          setCurrentPage={setCurrentPage}
           searchTerm={movieSearchTerm}
           setSearchTerm={setMovieSearchTerm}
           type="Movie"
@@ -66,8 +77,8 @@ function App() {
         <Row>
           <Col xs={12} md={7}>
             <Card>
-              <MovieList data={searchResults} nominatedMovies={nominatedMovies} setNominatedMovies={setNominatedMovies} isLoading={isLoading} />
-            </Card>
+              <MovieList data={searchResults} nominatedMovies={nominatedMovies} setNominatedMovies={setNominatedMovies} isLoading={isLoading} changePage={changePage} currentPage={currentPage} />
+            </Card> 
           </Col>
 
           <Col xs={12} md={5}>

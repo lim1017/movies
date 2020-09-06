@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SimplePaper(props) {
-  console.log(props)
   const classes = useStyles();
 
   return (

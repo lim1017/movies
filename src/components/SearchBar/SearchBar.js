@@ -1,17 +1,14 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 
-interface Props {
-  type: string;
-  searchTerm: string;
-  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
-}
 
 
-const SearchBar: React.FC<Props> = ({ type, searchTerm, setSearchTerm }) => {
+
+const SearchBar = ({ type, searchTerm, setSearchTerm, setCurrentPage }) => {
 
   const handleSearch = (text) =>{
       setSearchTerm(text)
+      setCurrentPage(1)
   };
 
   return (
