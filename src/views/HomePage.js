@@ -6,14 +6,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import useDebounce from "../hooks/useDebounce";
 import MovieList from "../components/MovieList/MovieList";
 import NominationList from "../components/NominationList/NominationList";
-import AppBar from "../components/AppBar/AppBar"
 import movieDBapi from "../apis/movieDBapi"
 import Card from "../components/Card/Card";
-
  
-//todo
-// fix disallow click, but allow hovor
-
+require("dotenv").config();
 const apiKey = process.env.REACT_APP_OMDB;  
 
 function App({isLoggedIn}) {
@@ -21,7 +17,6 @@ function App({isLoggedIn}) {
   const [currentPage, setCurrentPage] = useState(1)
   const [searchResults, setSearchResults] = useState([]);
   const [nominatedMovies, setNominatedMovies] = useState([]);
-  // const [ isLoggedIn, setIsLoggedIn ] = useState({username:"", user_id: "", nominations:[]})
   const [ isLoading, setIsLoading] = useState(false)
 
   const debouncedSearch = useDebounce(movieSearchTerm, 500);
