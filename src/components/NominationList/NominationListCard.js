@@ -33,6 +33,7 @@ export default function NominationListCard({
               <a
                 href={`https://www.imdb.com/title/${item?.imdbID}`}
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <button
                   className="movie-button"

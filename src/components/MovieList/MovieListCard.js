@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 import Card from "../Card/Card";
 
@@ -41,6 +41,7 @@ export default function MovieListCard({
             <a
               href={`https://www.imdb.com/title/${movie.imdbID}`}
               target="_blank"
+              rel="noopener noreferrer"
             >
               <button className="movie-button" style={{ marginLeft: "2em" }}>
                 Details

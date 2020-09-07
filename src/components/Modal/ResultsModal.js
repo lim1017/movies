@@ -4,7 +4,6 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 
-import TreeMap from "../Chart/TreeMap";
 import TreeMap2 from "../Chart/TreeMap2";
 
 const useStyles = makeStyles((theme) => ({
@@ -32,23 +31,6 @@ export default function TransitionsModal({
   const handleClose = () => {
     setShowModal(false);
   };
-
-  const convertData = (data) => {
-    let finalOP = [];
-
-    data.forEach((element) => {
-      finalOP.push({
-        name: [element[0] + ": " + element[1]],
-        size: element[1],
-      });
-    });
-
-    return finalOP;
-  };
-
-  const data = Object.entries(voteTotal);
-
-  let formatted = convertData(data);
 
   return (
     <div>

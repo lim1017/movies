@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from "react";
-
-
-
-
+import { useEffect, useState } from "react";
 
 // Our hook
-const useDebounce = (value: string, delay:number) => {
+const useDebounce = (value, delay) => {
   // State and setters for debounced value
   const [debouncedValue, setDebouncedValue] = useState(value);
 
@@ -18,7 +14,7 @@ const useDebounce = (value: string, delay:number) => {
 
       // Return a cleanup function that will be called every time ...
       // ... useEffect is re-called. useEffect will only be re-called ...
-      // ... if value changes (see the inputs array below). 
+      // ... if value changes (see the inputs array below).
       // This is how we prevent debouncedValue from changing if value is ...
       // ... changed within the delay period. Timeout gets cleared and restarted.
       // To put it in context, if the user is typing within our app's ...
@@ -31,10 +27,10 @@ const useDebounce = (value: string, delay:number) => {
     // Only re-call effect if value changes
     // You could also add the "delay" var to inputs array if you ...
     // ... need to be able to change that dynamically.
-    [value] 
+    [value]
   );
 
   return debouncedValue;
-}
+};
 
 export default useDebounce;

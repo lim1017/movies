@@ -53,7 +53,11 @@ const NominationList = ({
       await serverApi.patch(`/users/${userId}`, {
         nominations: JSON.stringify(nominatedMovies),
       });
+
+      Swal.fire(`Thank you for your submission`, "", "success");
+
     } catch {
+      Swal.fire(`Something went wrong.. Please try again later`, "", "error");
       console.log("error");
     }
   };
