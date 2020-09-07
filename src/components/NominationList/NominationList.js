@@ -142,7 +142,7 @@ const NominationList = ({
           {isUserLogged ? (
             <CopyToClipboard
               copy={shareProfile}
-              text={`http://localhost:3000/#/profile/${isLoggedIn?.username}`}
+              text={`https://tlim-shoppies.netlify.app/#/profile/${isLoggedIn?.username}`}
             >
               <button
                 onClick={shareProfile}
