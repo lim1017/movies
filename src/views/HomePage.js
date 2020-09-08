@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import "../styles/App.scss";
-import SearchBar from "../components/SearchBar/SearchBar";
 import { Container, Row, Col } from "react-bootstrap";
+import Swal from "sweetalert2";
 import "bootstrap/dist/css/bootstrap.min.css";
-import useDebounce from "../hooks/useDebounce";
+import "../styles/App.scss";
+
+import SearchBar from "../components/SearchBar/SearchBar";
 import MovieList from "../components/MovieList/MovieList";
 import NominationList from "../components/NominationList/NominationList";
-import movieDBapi from "../apis/movieDBapi";
 import Card from "../components/Card/Card";
+import useDebounce from "../hooks/useDebounce";
+import movieDBapi from "../apis/movieDBapi";
 
 require("dotenv").config();
 const apiKey = process.env.REACT_APP_OMDB;
@@ -35,12 +37,15 @@ function App({ isLoggedIn }) {
           `/?s=${movieSearchTerm}&apikey=${apiKey}&page=${currentPage}&type=movie`
         )
         .then((response) => {
-          console.log(response);
           setSearchResults(response.data);
           setIsLoading(false);
         })
         .catch((err) => {
-          console.log(err);
+          Swal.fire(
+            `Something went wrong.. Please try again later`,
+            "",
+            "error"
+          );
         });
     };
 
