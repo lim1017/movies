@@ -16,8 +16,10 @@ Server: https://tlim-shoppies.herokuapp.com/api/
 
 ### `Additional features` 
 Long Load: Allow up to 15 seconds for heroku to "wake up"
+
 <br>
 Data persistence:  Create an account with a unique username to save your nominations
+
 <br>
 
 Animations: used react-spring to implement animations when loading search results & nominations
