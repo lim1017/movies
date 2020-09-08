@@ -14,11 +14,20 @@ Open http://localhost:3000 to view it in the browser.
 Client: https://tlim-shoppies.netlify.app/
 Server: https://tlim-shoppies.herokuapp.com/api/
 
-### `Additional feature' 
+### `Additional features` 
 Long Load: Allow up to 15 seconds for heroku to "wake up"
+<br>
 Data persistence:  Create an account with a unique username to save your nominations
-Animations: used react-spring to implement animations when loading search results & nominations 
-Shareable links:  If a user saves their nominations, they can share them with a personalized link 
+<br>
+
+Animations: used react-spring to implement animations when loading search results & nominations
+<br>
+
+Shareable links:  If a user saves their nominations, they can share them with a personalized link
+<br>
+
 Nomination Results: A user can view the aggregate nominations of all users in Tree Map form
+<br>
+
 Responsive: Responsive for the most part.
 
