@@ -22,11 +22,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ButtonAppBar(props) {
+  const header = useRef()
   const classes = useStyles();
+
   const [userTextField, setUserTextField] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  const header = useRef()
+  const [headerHeight, setHeaderHeight] = useState(header?.current?.clientHeight)
 
   const { isLoggedIn, setIsLoggedIn } = props
 
@@ -34,6 +35,7 @@ function ButtonAppBar(props) {
 
   useEffect(() => {
     const userName = localStorage.getItem("username");
+    setHeaderHeight(header.current.clientHeight)
 
     const fetchUser = async () => {
       setIsLoading(true);
@@ -150,7 +152,7 @@ function ButtonAppBar(props) {
   };
 
   return (
-    <div className={classes.root}  style={{marginBottom: header?.current?.clientHeight}}>
+    <div className={classes.root}  style={{marginBottom: headerHeight}}>
       <AppBar ref={header} position="fixed" color="secondary">
         <Toolbar>
           <div
